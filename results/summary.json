@@ -154,8 +154,8 @@
   },
   "image_size_mb": 1615.7,
   "gitleaks_clean": null,
-  "failed_gate_run_url": null,
-  "passing_run_url": null,
+  "failed_gate_run_url": "https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42529244031",
+  "passing_run_url": "https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42529580217",
   "release_checksum_ok": true,
   "unit_tests": "33"
 }

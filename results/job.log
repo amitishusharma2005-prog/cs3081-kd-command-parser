@@ -11363,3 +11363,76 @@ Successful requests by header:
 [22:14:19] stage evidence done in 2675s
 [22:14:19] === STAGE ci ===
 [22:14:19] $ git add -A
+[22:14:19] $ git commit -m Evidence from deployment tests
+[main ad368c0] Evidence from deployment tests
+ 50 files changed, 7688 insertions(+)
+ create mode 100644 results/cluster_state_app.log
+ create mode 100644 results/cold_start_times.log
+ create mode 100644 results/cost_run.log
+ create mode 100644 results/cost_slo.json
+ create mode 100644 results/deployment_applied.yaml
+ create mode 100644 results/docker_50req_limit_test.log
+ create mode 100644 results/fault_inject.log
+ create mode 100644 results/hpa_load_console.log
+ create mode 100644 results/hpa_load_exceptions.csv
+ create mode 100644 results/hpa_load_failures.csv
+ create mode 100644 results/hpa_load_stats.csv
+ create mode 100644 results/hpa_load_stats_history.csv
+ create mode 100644 results/hpa_scaling.log
+ create mode 100644 results/image_size.txt
+ create mode 100644 results/kubectl_top_pods.log
+ create mode 100644 results/loadtest_console.log
+ create mode 100644 results/loadtest_exceptions.csv
+ create mode 100644 results/loadtest_failures.csv
+ create mode 100644 results/loadtest_headers.json
+ create mode 100644 results/loadtest_stats.csv
+ create mode 100644 results/loadtest_stats_history.csv
+ create mode 100644 results/pod_recovery.log
+ create mode 100644 results/predictions.jsonl
+ create mode 100644 results/readiness_gate.log
+ create mode 100644 results/recovery_console.log
+ create mode 100644 results/recovery_exceptions.csv
+ create mode 100644 results/recovery_failures.csv
+ create mode 100644 results/recovery_headers.json
+ create mode 100644 results/recovery_stats.csv
+ create mode 100644 results/recovery_stats_history.csv
+ create mode 100644 results/release_checksum.log
+ create mode 100644 results/rolling_update_rollback.log
+ create mode 100644 results/rollout_console.log
+ create mode 100644 results/rollout_exceptions.csv
+ create mode 100644 results/rollout_failures.csv
+ create mode 100644 results/rollout_headers.json
+ create mode 100644 results/rollout_stats.csv
+ create mode 100644 results/rollout_stats_history.csv
+ create mode 100644 results/smoke_parse.log
+ create mode 100644 results/student_v1_predictions.jsonl
+ create mode 100644 results/student_v1_validation.json
+ create mode 100644 results/student_v2_predictions.jsonl
+ create mode 100644 results/student_v2_validation.json
+ create mode 100644 results/summary.json
+ create mode 100644 results/teacher_predictions.jsonl
+ create mode 100644 results/teacher_validation.json
+ create mode 100644 results/untrained_predictions.jsonl
+ create mode 100644 results/untrained_validation.json
+[22:14:20] $ git push -u origin main
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+   71551b8..ad368c0  main -> main
+branch 'main' set up to track 'origin/main'.
+[22:14:23] $ git tag -f final && git push -f origin final
+Updated tag 'final' (was 71551b8)
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+ + 71551b8...ad368c0 final -> final (forced update)
+[22:14:27] $ gh workflow run ci.yml -R amitishusharma2005-prog/cs3081-kd-command-parser -f candidate=untrained
+https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42529244031
+[22:18:25] untrained run https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42529244031: {'lint': 'success', 'unit-tests': 'success', 'model-evaluation': 'success', 'quality-gate': 'failure', 'secret-scan': 'success'}
+[22:18:26] $ gh workflow run ci.yml -R amitishusharma2005-prog/cs3081-kd-command-parser -f candidate=student
+https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42529580217
+[22:20:38] student run https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42529580217: {'lint': 'success', 'unit-tests': 'success', 'model-evaluation': 'success', 'quality-gate': 'success', 'secret-scan': 'success'}
+[22:20:38] stage ci done in 379s
+[22:20:38] === STAGE finalize ===
+[22:20:38] $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/build_report.py
+report/report.pdf: 4 pages total (last page is References)
+[22:20:39] $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/build_reflection.py
+reflection_draft_typed.pdf written (font 12.5 pt): print it, copy it BY HAND, scan the 3 pages to 230103033.pdf
+230103033.pdf did not exist: the typed draft was copied there as a PLACEHOLDER. Replace it with your handwritten scan.
+[22:20:39] $ git add -A

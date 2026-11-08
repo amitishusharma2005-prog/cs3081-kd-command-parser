@@ -1,0 +1,16 @@
+{
+  "untrained": {
+    "lint": "success",
+    "unit-tests": "success",
+    "model-evaluation": "success",
+    "quality-gate": "failure",
+    "secret-scan": "success"
+  },
+  "student": {
+    "lint": "success",
+    "unit-tests": "success",
+    "model-evaluation": "success",
+    "quality-gate": "success",
+    "secret-scan": "success"
+  }
+}
