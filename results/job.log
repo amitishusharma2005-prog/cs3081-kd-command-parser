@@ -11436,3 +11436,41 @@ report/report.pdf: 4 pages total (last page is References)
 reflection_draft_typed.pdf written (font 12.5 pt): print it, copy it BY HAND, scan the 3 pages to 230103033.pdf
 230103033.pdf did not exist: the typed draft was copied there as a PLACEHOLDER. Replace it with your handwritten scan.
 [22:20:39] $ git add -A
+[22:20:39] $ git commit -m Report, reflection and results
+[main c9c2ccf] Report, reflection and results
+ 9 files changed, 422 insertions(+), 2 deletions(-)
+ create mode 100644 230103033.pdf
+ create mode 100644 reflection_draft_typed.pdf
+ create mode 100644 report/report.pdf
+ create mode 100644 results/ci_jobs.json
+ create mode 100644 results/failed_gate_run_url.txt
+ create mode 100644 results/passing_run_url.txt
+[22:20:39] $ docker run --rm -v "$PWD":/repo zricethezav/gitleaks:v8.21.2 detect --source /repo --no-banner --redact
+/home/student/cs3081-kd-command-parser/scripts/run_all.py:66: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  f.write(f"# {datetime.utcnow().isoformat()}Z  $ {cmd if shell else ' '.join(cmd)}  (exit {rc})\n{text}")
+Unable to find image 'zricethezav/gitleaks:v8.21.2' locally
+v8.21.2: Pulling from zricethezav/gitleaks
+94c7366c1c30: Pulling fs layer
+3e97f466b634: Pulling fs layer
+4874c05f69ad: Pulling fs layer
+43aa3c0c54b2: Pulling fs layer
+43aa3c0c54b2: Download complete
+94c7366c1c30: Download complete
+3e97f466b634: Download complete
+4874c05f69ad: Download complete
+94c7366c1c30: Pull complete
+03242aded468: Download complete
+3e97f466b634: Pull complete
+43aa3c0c54b2: Pull complete
+4874c05f69ad: Pull complete
+Digest: sha256:0e99e8821643ea5b235718642b93bb32486af9c8162c8b8731f7cbdc951a7f46
+Status: Downloaded newer image for zricethezav/gitleaks:v8.21.2
+[90m10:20PM[0m [32mINF[0m 3 commits scanned.
+[90m10:20PM[0m [32mINF[0m scan completed in 714ms
+[90m10:20PM[0m [32mINF[0m no leaks found
+[22:20:47] $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/build_report.py
+report/report.pdf: 4 pages total (last page is References)
+[22:20:48] $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/build_reflection.py
+reflection_draft_typed.pdf written (font 12.5 pt): print it, copy it BY HAND, scan the 3 pages to 230103033.pdf
+230103033.pdf already exists and was left untouched (your scan).
+[22:20:48] $ git add -A
