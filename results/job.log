@@ -13234,3 +13234,28 @@ Stage 'ci' stopped. Fix the cause and run again; finished stages are skipped.
 [23:48:36] job: starting Ollama on all interfaces
 [23:48:51] === STAGE ci ===
 [23:48:51] $ git add -A
+[23:48:51] $ git commit -m Evidence from deployment tests
+[main 809cb11] Evidence from deployment tests
+ 4 files changed, 39 insertions(+), 1 deletion(-)
+[23:48:51] $ git push -u origin main
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+   9c3d773..809cb11  main -> main
+branch 'main' set up to track 'origin/main'.
+[23:48:54] $ git tag -f final && git push -f origin final
+Updated tag 'final' (was 9c3d773)
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+ + 9c3d773...809cb11 final -> final (forced update)
+[23:48:58] $ gh workflow run ci.yml -R amitishusharma2005-prog/cs3081-kd-command-parser -f candidate=untrained
+https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42536975945
+[23:52:12] untrained run https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42536975945: {'lint': 'success', 'unit-tests': 'success', 'model-evaluation': 'success', 'quality-gate': 'failure', 'secret-scan': 'success'}
+[23:52:14] $ gh workflow run ci.yml -R amitishusharma2005-prog/cs3081-kd-command-parser -f candidate=student
+https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42537234193
+[23:54:46] student run https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42537234193: {'lint': 'success', 'unit-tests': 'success', 'model-evaluation': 'success', 'quality-gate': 'success', 'secret-scan': 'success'}
+[23:54:46] stage ci done in 355s
+[23:54:46] === STAGE finalize ===
+[23:54:46] $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/build_report.py
+report/report.pdf: 4 pages total (last page is References)
+[23:54:47] $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/build_reflection.py
+reflection_draft_typed.pdf written (font 12.5 pt): print it, copy it BY HAND, scan the 3 pages to 230103033.pdf
+230103033.pdf already exists and was left untouched (your scan).
+[23:54:47] $ git add -A
