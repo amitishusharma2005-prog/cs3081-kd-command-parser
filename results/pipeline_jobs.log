@@ -1,0 +1,11 @@
+# 2026-11-08T18:25:42.210511Z  $ kubectl -n pipeline get jobs,pods -o wide  (exit 0)
+NAME                 STATUS     COMPLETIONS   DURATION   AGE   CONTAINERS   IMAGES                 SELECTOR
+job.batch/worker-0   Complete   1/1           48m        53m   worker       teacher-worker:local   batch.kubernetes.io/controller-uid=5b7803f8-807c-472e-948f-f95fed487d7a
+job.batch/worker-1   Complete   1/1           52m        53m   worker       teacher-worker:local   batch.kubernetes.io/controller-uid=d72b0fc6-1fc0-4650-89ab-892a463fddbc
+
+NAME                 READY   STATUS      RESTARTS   AGE   IP            NODE                          NOMINATED NODE   READINESS GATES
+pod/worker-0-7qcbx   0/1     Completed   0          53m   10.42.0.151   k3d-cs3081-cluster-server-0   <none>           <none>
+pod/worker-1-xgj7h   0/1     Completed   0          53m   10.42.0.152   k3d-cs3081-cluster-server-0   <none>           <none>
+NAME       START                  END
+worker-0   2026-11-08T17:32:36Z   2026-11-08T18:21:21Z
+worker-1   2026-11-08T17:32:36Z   2026-11-08T18:24:56Z

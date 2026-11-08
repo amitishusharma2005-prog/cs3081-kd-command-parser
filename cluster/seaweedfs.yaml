@@ -1,0 +1,76 @@
+# Secrets seaweedfs-s3-config / s3-credentials and ConfigMaps commands-pool, seed-scripts
+# are created by `make up` (scripts/secrets.sh) so nothing sensitive lives in Git.
+apiVersion: v1
+kind: Namespace
+metadata: {name: data}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: {name: seaweedfs-data, namespace: data}
+spec:
+  accessModes: [ReadWriteOnce]
+  resources: {requests: {storage: 5Gi}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: seaweedfs, namespace: data}
+spec:
+  replicas: 1
+  strategy: {type: Recreate}
+  selector: {matchLabels: {app: seaweedfs}}
+  template:
+    metadata: {labels: {app: seaweedfs}}
+    spec:
+      containers:
+        - name: seaweedfs
+          image: chrislusf/seaweedfs:3.80
+          args: ["server", "-dir=/data", "-ip.bind=0.0.0.0", "-master.volumeSizeLimitMB=256",
+                 "-volume.max=30", "-s3", "-s3.port=8333", "-s3.config=/etc/seaweedfs/s3.json"]
+          ports: [{containerPort: 8333, name: s3}]
+          volumeMounts:
+            - {name: data, mountPath: /data}
+            - {name: s3-config, mountPath: /etc/seaweedfs, readOnly: true}
+          readinessProbe:
+            tcpSocket: {port: 8333}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        - name: data
+          persistentVolumeClaim: {claimName: seaweedfs-data}
+        - name: s3-config
+          secret: {secretName: seaweedfs-s3-config}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: seaweedfs-s3, namespace: data}
+spec:
+  selector: {app: seaweedfs}
+  ports: [{name: s3, port: 8333, targetPort: 8333}]
+---
+# Creates buckets datasets and models and uploads commands_pool.jsonl
+apiVersion: batch/v1
+kind: Job
+metadata: {name: seed-buckets, namespace: data}
+spec:
+  backoffLimit: 6
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: seed
+          image: python:3.11-slim
+          command: ["sh", "-c", "pip install -q boto3==1.35.90 && python /scripts/seed_buckets.py"]
+          env:
+            - {name: S3_ENDPOINT, value: "http://seaweedfs-s3.data.svc.cluster.local:8333"}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_ACCESS_KEY_ID}}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_SECRET_ACCESS_KEY}}
+          volumeMounts:
+            - {name: scripts, mountPath: /scripts}
+            - {name: pool, mountPath: /pool}
+      volumes:
+        - name: scripts
+          configMap: {name: seed-scripts}
+        - name: pool
+          configMap: {name: commands-pool}

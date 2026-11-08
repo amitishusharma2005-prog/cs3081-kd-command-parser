@@ -1,0 +1,51 @@
+# Two parallel teacher-labelling workers. Ollama (phi3.5) runs on the laptop:
+#   OLLAMA_HOST=0.0.0.0 ollama serve   (k3d exposes the host as host.k3d.internal)
+apiVersion: v1
+kind: Namespace
+metadata: {name: pipeline}
+---
+apiVersion: batch/v1
+kind: Job
+metadata: {name: worker-0, namespace: pipeline}
+spec:
+  backoffLimit: 30
+  template:
+    metadata: {labels: {app: teacher-worker, shard: "0"}}
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: worker
+          image: teacher-worker:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: SHARD_INDEX, value: "0"}
+            - {name: SHARD_COUNT, value: "2"}
+            - {name: OLLAMA_URL, value: "http://host.k3d.internal:11434"}
+            - {name: S3_ENDPOINT, value: "http://seaweedfs-s3.data.svc.cluster.local:8333"}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_ACCESS_KEY_ID}}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_SECRET_ACCESS_KEY}}
+---
+apiVersion: batch/v1
+kind: Job
+metadata: {name: worker-1, namespace: pipeline}
+spec:
+  backoffLimit: 30
+  template:
+    metadata: {labels: {app: teacher-worker, shard: "1"}}
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: worker
+          image: teacher-worker:local
+          imagePullPolicy: IfNotPresent
+          env:
+            - {name: SHARD_INDEX, value: "1"}
+            - {name: SHARD_COUNT, value: "2"}
+            - {name: OLLAMA_URL, value: "http://host.k3d.internal:11434"}
+            - {name: S3_ENDPOINT, value: "http://seaweedfs-s3.data.svc.cluster.local:8333"}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_ACCESS_KEY_ID}}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_SECRET_ACCESS_KEY}}

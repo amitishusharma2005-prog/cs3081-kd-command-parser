@@ -1,0 +1,3 @@
+# Ollama reachability from pods, 2026-11-07T09:07:23
+FAIL http://host.k3d.internal:11434  phase=Failed  | curl: (6) Could not resolve host: host.k3d.internal
+OK   http://172.19.0.1:11434  phase=Succeeded  | {"models":[{"name":"phi3.5:latest","model":"phi3.5:latest","modified_at":"2026-11-07T09:07:17.496631486Z","size":2176178843,"digest":"61819fb370a3c1a9be6694869331e5f85f867a079e9271d66cb223acb81d04ba","details":{"parent_model":"","format":"gguf","family":"phi3","families":["phi3"],"parameter_size":"3

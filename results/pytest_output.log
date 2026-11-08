@@ -1,0 +1,43 @@
+# 2026-11-07T08:10:13.869244Z  $ /home/student/cs3081-kd-command-parser/.venv/bin/python -m pytest -v tests  (exit 0)
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.7.0 -- /home/student/cs3081-kd-command-parser/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /home/student/cs3081-kd-command-parser
+plugins: anyio-4.14.2
+collecting ... collected 33 items
+
+tests/test_all.py::test_clean_each_rule_counted_once PASSED              [  3%]
+tests/test_all.py::test_clean_duplicate_keeps_smallest_id_even_if_input_unsorted PASSED [  6%]
+tests/test_all.py::test_clean_slot_rules_non_string_and_empty PASSED     [  9%]
+tests/test_all.py::test_healthz_ok_even_while_loading PASSED             [ 12%]
+tests/test_all.py::test_readyz_503_until_loaded_then_200 PASSED          [ 15%]
+tests/test_all.py::test_parse_valid_returns_only_four_keys_and_headers PASSED [ 18%]
+tests/test_all.py::test_parse_invalid_model_output_is_500[not json] PASSED [ 21%]
+tests/test_all.py::test_parse_invalid_model_output_is_500[{"intent": "alarm_set"}] PASSED [ 24%]
+tests/test_all.py::test_parse_invalid_model_output_is_500[{"intent": "nope", "date": null, "time": null, "place": "london"}] PASSED [ 27%]
+tests/test_all.py::test_parse_invalid_model_output_is_500[{"intent": "weather_query", "date": 3, "time": null, "place": "london"}] PASSED [ 30%]
+tests/test_all.py::test_parse_invalid_model_output_is_500[{"intent": "alarm_set", "date": "to] PASSED [ 33%]
+tests/test_all.py::test_fault_inject_forces_500 PASSED                   [ 36%]
+tests/test_all.py::test_nacl_decisions[args0-allow] PASSED               [ 39%]
+tests/test_all.py::test_nacl_decisions[args1-allow] PASSED               [ 42%]
+tests/test_all.py::test_nacl_decisions[args2-deny] PASSED                [ 45%]
+tests/test_all.py::test_nacl_decisions[args3-deny] PASSED                [ 48%]
+tests/test_all.py::test_nacl_decisions[args4-allow] PASSED               [ 51%]
+tests/test_all.py::test_nacl_decisions[args5-deny] PASSED                [ 54%]
+tests/test_all.py::test_nacl_decisions[args6-deny] PASSED                [ 57%]
+tests/test_all.py::test_nacl_decisions[args7-allow] PASSED               [ 60%]
+tests/test_all.py::test_nacl_decisions[args8-deny] PASSED                [ 63%]
+tests/test_all.py::test_nacl_decisions[args9-deny] PASSED                [ 66%]
+tests/test_all.py::test_nacl_decisions[args10-allow] PASSED              [ 69%]
+tests/test_all.py::test_nacl_decisions[args11-deny] PASSED               [ 72%]
+tests/test_all.py::test_nacl_decisions[args12-allow] PASSED              [ 75%]
+tests/test_all.py::test_nacl_decisions[args13-deny] PASSED               [ 78%]
+tests/test_all.py::test_nacl_decisions[args14-deny] PASSED               [ 81%]
+tests/test_all.py::test_nacl_sample_packets_all_correct PASSED           [ 84%]
+tests/test_all.py::test_score_perfect_and_broken PASSED                  [ 87%]
+tests/test_all.py::test_prompt_tokens_are_masked PASSED                  [ 90%]
+tests/test_summarize.py::test_coldstart_parser_takes_slowest_pod_and_median PASSED [ 93%]
+tests/test_summarize.py::test_hpa_parser_detects_up_and_down PASSED      [ 96%]
+tests/test_summarize.py::test_docker50_and_top_parsers PASSED            [100%]
+
+============================== 33 passed in 4.43s ==============================

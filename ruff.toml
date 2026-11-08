@@ -1,0 +1,9 @@
+line-length = 120
+target-version = "py311"
+extend-exclude = ["tools"]
+
+[lint]
+select = ["E", "F", "I"]
+
+[lint.per-file-ignores]
+"scripts/*.py" = ["E501", "E731", "E401", "E701", "E702"]

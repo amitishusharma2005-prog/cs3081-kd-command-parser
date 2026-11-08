@@ -1,0 +1,35 @@
+# 2026-11-08T18:25:45.379524Z  $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/check_submission.py  (exit 1)
+PASS  k3d.yaml, teacher prompt
+PASS  every id in exactly one shard  [3000 lines, 3000 unique, pool 3000]
+PASS  train.sha256 matches train.jsonl
+PASS  counts add up  [{'input': 3000, 'a': 1, 'b': 0, 'c': 10, 'd': 79, 'duplicates': 47, 'kept': 2863}]
+PASS  config.yaml has the six items
+PASS  loss.csv one row per epoch  [6 rows]
+FAIL  model.sha256 for v1 and v2
+FAIL  results/teacher predictions + report
+FAIL  results/untrained predictions + report
+FAIL  results/student_v1 predictions + report
+FAIL  results/student_v2 predictions + report
+PASS  service files
+PASS  pinned requirements
+PASS  manifests
+PASS  network files
+PASS  nacl_sim --check
+PASS  CI workflow, Makefile, AI_USE.md, README.md
+FAIL  results/loadtest_stats.csv
+FAIL  results/loadtest_headers.json
+FAIL  results/docker_50req_limit_test.log
+FAIL  results/readiness_gate.log
+FAIL  results/hpa_scaling.log
+FAIL  results/rolling_update_rollback.log
+FAIL  results/pod_recovery.log
+FAIL  results/cold_start_times.log
+FAIL  results/kubectl_top_pods.log
+FAIL  results/cost_slo.json
+FAIL  report/report.pdf
+FAIL  230103033.pdf (reflection)
+FAIL  failed quality-gate CI run URL recorded
+FAIL  git tag final
+PASS  no model weights tracked
+
+13/32 checks passed

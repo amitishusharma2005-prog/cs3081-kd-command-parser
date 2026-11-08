@@ -1,0 +1,18 @@
+# 2026-11-08T20:37:48.316409Z  $ /home/student/cs3081-kd-command-parser/.venv/bin/python training/train.py --version v2  (exit 0)
+The `GPTNeoXSdpaAttention` class is deprecated in favor of simply modifying the `config._attn_implementation`attribute of the `GPTNeoXAttention` class! It will be removed in v4.48
+epoch 1/8 loss 0.5241
+epoch 2/8 loss 0.3870
+epoch 3/8 loss 0.2252
+epoch 4/8 loss 0.1152
+epoch 5/8 loss 0.0681
+epoch 6/8 loss 0.0404
+epoch 7/8 loss 0.0241
+epoch 8/8 loss 0.0087
+release asset dist/model-v2.tar.gz sha256 3c51155780c6de0f6bd5e0bf5728ac535d9820da80db8d5fef73ee1c7c46b98d
+uploaded s3://models/v2/config.json
+uploaded s3://models/v2/generation_config.json
+uploaded s3://models/v2/model.safetensors
+uploaded s3://models/v2/special_tokens_map.json
+uploaded s3://models/v2/tokenizer.json
+uploaded s3://models/v2/tokenizer_config.json
+uploaded s3://models/v2/version.json

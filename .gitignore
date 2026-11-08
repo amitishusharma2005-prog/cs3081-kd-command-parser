@@ -1,0 +1,17 @@
+.secrets/
+dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.venv/
+models/*/*
+!models/*/model.sha256
+!models/*/version.json
+models/_subset/
+*.safetensors
+*.bin
+*.pt
+.env
+.pipeline_state.json
+230103033.zip

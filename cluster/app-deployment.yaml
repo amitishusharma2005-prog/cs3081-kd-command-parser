@@ -1,0 +1,86 @@
+# Secret s3-credentials (namespace app) is created by `make up` with generated values.
+apiVersion: v1
+kind: Namespace
+metadata: {name: app}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: command-parser, namespace: app}
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: {maxUnavailable: 0, maxSurge: 1}
+  selector: {matchLabels: {app: command-parser}}
+  template:
+    metadata: {labels: {app: command-parser}}
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+        - name: command-parser
+          image: command-parser:local
+          imagePullPolicy: IfNotPresent
+          ports: [{containerPort: 8000}]
+          env:
+            - {name: MODEL_URI, value: "s3://models/v1/"}
+            - {name: MODEL_VERSION, value: "v1"}
+            - {name: S3_ENDPOINT, value: "http://seaweedfs-s3.data.svc.cluster.local:8333"}
+            - {name: MAX_NEW_TOKENS, value: "96"}
+            - {name: FAULT_INJECT, value: "0"}
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_ACCESS_KEY_ID}}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_SECRET_ACCESS_KEY}}
+          resources:
+            requests: {cpu: 250m, memory: 512Mi}
+            limits: {cpu: "1", memory: 1Gi}
+          lifecycle:
+            preStop:
+              exec: {command: ["sleep", "8"]}
+          livenessProbe:
+            httpGet: {path: /healthz, port: 8000}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet: {path: /readyz, port: 8000}
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata: {name: command-parser-svc, namespace: app}
+spec:
+  selector: {app: command-parser}
+  ports: [{port: 8000, targetPort: 8000}]
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: command-parser-ingress
+  namespace: app
+  annotations: {traefik.ingress.kubernetes.io/router.entrypoints: web}
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /parse
+            pathType: Prefix
+            backend:
+              service: {name: command-parser-svc, port: {number: 8000}}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata: {name: command-parser-hpa, namespace: app}
+spec:
+  scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: command-parser}
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: {type: Utilization, averageUtilization: 70}

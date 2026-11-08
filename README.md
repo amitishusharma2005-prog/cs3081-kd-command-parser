@@ -1,0 +1,70 @@
+# CS3081 Mini Project: Knowledge Distillation of a Command Parser on a Local Cloud
+
+Amit Sharma, roll number 230103033
+Repository: https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser
+Release (model assets): https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/releases/tag/final
+
+Teacher `phi3.5` (Ollama, temperature 0, seed 42) -> sequence-level distillation into `EleutherAI/pythia-70m`
+-> FastAPI service in a container -> k3d/Kubernetes with SeaweedFS object storage.
+
+## Layout
+```
+cluster/    k3d.yaml, seaweedfs.yaml, pipeline-workers.yaml, app-deployment.yaml
+prompts/    teacher_prompt.txt
+worker/     worker.py (sharded teacher labelling), clean.py, teacher.py, Dockerfile
+training/   config.yaml, train.py, evaluate.py, data.py, package.py, s3_upload.py, loss.csv
+service/    app.py, requirements.txt, Dockerfile
+network/    subnets.md, nacl.json, packets_sample.jsonl
+tools/      score.py, locustfile.py, nacl_sim.py (from the kit, unchanged)
+scripts/    secrets.sh, seed_*.py, evidence.sh, cost.py
+tests/      test_all.py          .github/workflows/ci.yml          Makefile
+datasets/   teacher/shard-*.jsonl, v1/train.jsonl, v1/train.sha256
+models/     v1/ v2/ (model.sha256 + version.json only; weights live in object storage and the Release)
+results/    logs, score reports, Locust output
+report/     report.pdf
+```
+Prerequisites: Docker, k3d, kubectl, Python 3.11, Ollama (for labelling only), `pip install locust`.
+
+## Fully automatic
+Windows 11: double-click `RUN_EVERYTHING.bat` (installs WSL2 + Ubuntu + Docker Engine on the drive with most free space, not Docker Desktop; may restart Windows once and continues by itself). Linux/WSL2: `bash setup_and_run.sh`. Both install what is missing and run `scripts/run_all.py`.
+
+## One command (if the tools are already installed)
+Linux or WSL2 with Docker, k3d, kubectl, git and Ollama (`OLLAMA_HOST=0.0.0.0 ollama serve`, phi3.5 pulled). The GitHub CLI (`gh auth login`) lets it create the Release and trigger the CI runs itself.
+```bash
+python3 scripts/run_all.py            # or: make all
+```
+It runs preflight (lint, tests, NACL check), cluster, teacher labelling, cleaning, training v1/v2, GitHub Release, evaluation of all three models,
+deployment, every Task 4/7 measurement, the two CI runs (untrained = failing gate, student = passing), then builds `report/report.pdf`, `230103033.pdf`, runs gitleaks and the submission check, tags `final` and writes `230103033.zip`.
+It is resumable (`--status`, `--from STAGE`, `--only STAGE`); a failing stage stops with the reason. Every number in the report comes from the real outputs in `results/`.
+After it finishes: print `reflection_draft_typed.pdf`, copy it by hand onto paper, scan 3 pages to `230103033.pdf` (replace the placeholder), then run `python3 scripts/seal_submission.py`.
+Optional: write your own challenges/observations in `my_notes.md` before the last stage; they are added to the reflection.
+
+## Step by step (what the runner does)
+```bash
+# 1. Label with the teacher (hours on CPU). Ollama on the host must listen on all interfaces:
+ollama pull phi3.5 && OLLAMA_HOST=0.0.0.0 ollama serve        # separate terminal
+k3d cluster create --config cluster/k3d.yaml && scripts/secrets.sh
+kubectl apply -f cluster/seaweedfs.yaml
+make label                      # two workers in namespace pipeline -> s3://datasets/teacher/shard-{0,1}.jsonl
+# download the shards (or point worker/clean.py at the bucket with S3_ENDPOINT set), then:
+make clean-data                 # datasets/v1/train.jsonl + train.sha256 + clean_report.json
+
+# 2. Train (CPU)
+pip install -r training/requirements.txt
+make train SUBSET=50            # smoke run, writes training/loss.csv
+make train                      # v1: first 1,500 records -> models/v1, dist/model-v1.tar.gz, models/v1/model.sha256
+make train VERSION=v2           # second version (seed 43, 8 epochs)
+# upload dist/model-v1.tar.gz and dist/model-v2.tar.gz as assets of the GitHub Release `final`
+
+# 3. Build, deploy, test, tear down (fresh clone: git clone ... && cd ... && make up)
+make up                         # cluster, secrets, SeaweedFS, models from the Release, image, Deployment/Service/Ingress/HPA
+make test                       # unit tests + NACL check
+locust -f tools/locustfile.py --headless --users 4 --spawn-rate 4 --run-time 2m --host http://localhost:8080 --csv results/loadtest
+scripts/evidence.sh all         # readiness, cold start, kubectl top, HPA, rolling update/rollback, recovery -> results/
+python3 scripts/cost.py         # cost per 1,000 requests + SLO error budget -> results/cost_slo.json
+make down                       # delete the cluster
+```
+Evaluation: `python training/evaluate.py --mode teacher --name teacher`, `--mode untrained --name untrained`,
+`--mode student --model-dir models/v1 --name student_v1` (outputs and score reports go to `results/`).
+
+Secrets: S3 credentials are generated by `scripts/secrets.sh` into `.secrets/` (git-ignored) and Kubernetes Secrets.

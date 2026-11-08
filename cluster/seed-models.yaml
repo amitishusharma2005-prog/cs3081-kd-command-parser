@@ -1,0 +1,29 @@
+# Applied by `make up` after the model assets exist on the GitHub Release.
+# Downloads the GitHub Release model assets, verifies their SHA-256 and stores them in bucket models
+apiVersion: batch/v1
+kind: Job
+metadata: {name: seed-models, namespace: data}
+spec:
+  backoffLimit: 6
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: seed
+          image: python:3.11-slim
+          command: ["sh", "-c", "pip install -q boto3==1.35.90 && python /scripts/seed_models.py"]
+          env:
+            - {name: S3_ENDPOINT, value: "http://seaweedfs-s3.data.svc.cluster.local:8333"}
+            - {name: RELEASE_BASE, value: "https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/releases/download/final"}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_ACCESS_KEY_ID}}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom: {secretKeyRef: {name: s3-credentials, key: AWS_SECRET_ACCESS_KEY}}
+          volumeMounts:
+            - {name: scripts, mountPath: /scripts}
+            - {name: checksums, mountPath: /checksums}
+      volumes:
+        - name: scripts
+          configMap: {name: seed-scripts}
+        - name: checksums
+          configMap: {name: model-checksums}

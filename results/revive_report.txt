@@ -1,0 +1,59 @@
+##### revive started 11:13 UTC = 16:43 IST
+### 1/6 stopping workers, launcher and the old watchdog
+    PID %CPU %MEM     ELAPSED COMMAND
+ 124493  800  0.0       00:00 ps
+ 124020  173 47.3       10:51 llama-server
+    928 61.2  9.0    19:12:57 k3s
+ 116626 10.5  0.6    01:02:17 metrics-server
+               total        used        free      shared  buff/cache   available
+Mem:            5780        4063          81           2        1800        1717
+### 2/6 finding an Ollama setup that is correct AND fast
+--- trying: GPU, small batch
+--- trying: CPU only
+--- trying: GPU, 16 layers
+Traceback (most recent call last):
+  File "/tmp/probe3.py", line 12, in <module>
+    out = teacher.ask_teacher(tpl, cmd, url="http://localhost:11434", retries=1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/student/cs3081-kd-command-parser/worker/teacher.py", line 25, in ask_teacher
+    r.raise_for_status()
+  File "/home/student/cs3081-kd-command-parser/.venv/lib/python3.12/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: http://localhost:11434/api/generate
+--- trying: GPU, no CUDA graphs
+Traceback (most recent call last):
+  File "/tmp/probe3.py", line 12, in <module>
+    out = teacher.ask_teacher(tpl, cmd, url="http://localhost:11434", retries=1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/student/cs3081-kd-command-parser/worker/teacher.py", line 25, in ask_teacher
+    r.raise_for_status()
+  File "/home/student/cs3081-kd-command-parser/.venv/lib/python3.12/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 500 Server Error: Internal Server Error for url: http://localhost:11434/api/generate
+### STOPPED: no setup worked. Ollama's own errors:
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: n_merges              = 0
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: BOS token             = 1 '<s>'
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: EOS token             = 32000 '<|endoftext|>'
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: EOT token             = 32007 '<|end|>'
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: UNK token             = 0 '<unk>'
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: PAD token             = 32000 '<|endoftext|>'
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: LF token              = 13 '<0x0A>'
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: EOG token             = 2 '</s>'
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: EOG token             = 32000 '<|endoftext|>'
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: EOG token             = 32007 '<|end|>'
+Nov 08 11:24:19 JARVIS ollama[125379]: print_info: max token length      = 48
+Nov 08 11:24:19 JARVIS ollama[125379]: load_tensors: loading model tensors, this can take a while... (load_mode = mmap)
+Nov 08 11:24:19 JARVIS ollama[125379]: time=2026-11-08T11:24:19.714Z level=INFO source=llama_server.go:1406 msg="waiting for llama-server to become available" status="llm server not responding"
+Nov 08 11:24:20 JARVIS ollama[125379]: time=2026-11-08T11:24:20.454Z level=INFO source=llama_server.go:1406 msg="waiting for llama-server to become available" status="llm server loading model"
+Nov 08 11:24:20 JARVIS ollama[125379]: ggml_backend_cuda_buffer_type_alloc_buffer: allocating 1596.41 MiB on device 0: cudaMalloc failed: out of memory
+Nov 08 11:24:20 JARVIS ollama[125379]: ggml_backend_buft_alloc_buffer_n_default: failed to allocate CUDA0 buffer of size 1673953280
+Nov 08 11:24:20 JARVIS ollama[125379]: llama_model_load: error loading model: unable to allocate CUDA0 buffer
+Nov 08 11:24:20 JARVIS ollama[125379]: llama_model_load_from_file_impl: failed to load model
+Nov 08 11:24:20 JARVIS ollama[125379]: cmn  common_init_: failed to load model '/usr/share/ollama/.ollama/models/blobs/sha256-b5374915da534cb93df39f03bd4f2cd5a0c533df0d5e21957dc9556c260be9eb'
+Nov 08 11:24:20 JARVIS ollama[125379]: srv    load_model: failed to load model, '/usr/share/ollama/.ollama/models/blobs/sha256-b5374915da534cb93df39f03bd4f2cd5a0c533df0d5e21957dc9556c260be9eb'
+Nov 08 11:24:20 JARVIS ollama[125379]: srv    operator(): operator(): cleaning up before exit...
+Nov 08 11:24:20 JARVIS ollama[125379]: srv  server_run_i: exiting due to model loading error
+Nov 08 11:24:20 JARVIS ollama[125379]: time=2026-11-08T11:24:20.989Z level=INFO source=llama_server.go:1406 msg="waiting for llama-server to become available" status="llm server not responding"
+Nov 08 11:24:21 JARVIS ollama[125379]: time=2026-11-08T11:24:21.072Z level=ERROR source=llama_server.go:1073 msg="llama-server terminated" error="exit status 1" exit=1
+Nov 08 11:24:21 JARVIS ollama[125379]: time=2026-11-08T11:24:21.266Z level=INFO source=sched.go:679 msg="Load failed" model=/usr/share/ollama/.ollama/models/blobs/sha256-b5374915da534cb93df39f03bd4f2cd5a0c533df0d5e21957dc9556c260be9eb error="llama-server process has terminated: exit status 1: cudaMalloc failed: out of memory\nggml_backend_buft_alloc_buffer_n_default: failed to allocate CUDA0 buffer of size 1673953280\nerror loading model: unable to allocate CUDA0 buffer"
+Send me the last 45 lines.

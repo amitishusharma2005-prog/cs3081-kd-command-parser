@@ -1,0 +1,14 @@
+s3://models/v1/config.json  799 bytes
+s3://models/v1/generation_config.json  111 bytes
+s3://models/v1/model.safetensors  281715176 bytes
+s3://models/v1/special_tokens_map.json  473 bytes
+s3://models/v1/tokenizer.json  3564303 bytes
+s3://models/v1/tokenizer_config.json  4876 bytes
+s3://models/v1/version.json  275 bytes
+s3://models/v2/config.json  799 bytes
+s3://models/v2/generation_config.json  111 bytes
+s3://models/v2/model.safetensors  281715176 bytes
+s3://models/v2/special_tokens_map.json  473 bytes
+s3://models/v2/tokenizer.json  3564303 bytes
+s3://models/v2/tokenizer_config.json  4876 bytes
+s3://models/v2/version.json  275 bytes

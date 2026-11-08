@@ -1,0 +1,82 @@
+name: ci
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      candidate:
+        description: "Model to evaluate: student (Release asset) or untrained (deliberately bad, shows the gate failing)"
+        type: choice
+        options: [student, untrained]
+        default: student
+
+env:
+  REPO: amitishusharma2005-prog/cs3081-kd-command-parser
+  RELEASE_TAG: final
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install ruff==0.8.4
+      - run: ruff check .
+
+  unit-tests:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install -r requirements-dev.txt tokenizers==0.21.0 transformers==4.47.1
+      - run: pytest -v tests
+      - run: python tools/nacl_sim.py network/nacl.json network/packets_sample.jsonl --check
+
+  model-evaluation:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.11"}
+      - run: pip install -r training/requirements.txt
+      - name: Download model from the GitHub Release and verify its checksum
+        if: ${{ github.event.inputs.candidate != 'untrained' }}
+        run: |
+          curl -fsSL -o model-v1.tar.gz "https://github.com/${REPO}/releases/download/${RELEASE_TAG}/model-v1.tar.gz"
+          echo "$(cut -d' ' -f1 models/v1/model.sha256)  model-v1.tar.gz" | sha256sum -c -
+          mkdir -p ci_model && tar -xzf model-v1.tar.gz -C ci_model
+      - name: Score the candidate on data/validation.jsonl
+        run: |
+          if [ "${{ github.event.inputs.candidate }}" = "untrained" ]; then
+            python training/evaluate.py --mode untrained --name ci_candidate
+          else
+            python training/evaluate.py --mode student --model-dir ci_model --name ci_candidate
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ci-evaluation
+          path: results/ci_candidate_*
+
+  quality-gate:
+    needs: model-evaluation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: {name: ci-evaluation, path: results}
+      - run: python tools/score.py results/ci_candidate_predictions.jsonl data/validation.jsonl --min-validity 95
+
+  secret-scan:
+    needs: quality-gate
+    if: ${{ always() }}   # report on secrets even when the gate failed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,13 @@
+{
+  "model_version": "v1",
+  "base_model": "EleutherAI/pythia-70m",
+  "seed": 42,
+  "epochs": 8,
+  "learning_rate": 0.0002,
+  "batch_size": 8,
+  "max_seq_length": 128,
+  "train_examples": 1500,
+  "final_train_loss": 0.0073,
+  "smoke_fallback": false,
+  "torch": "2.5.1+cpu"
+}

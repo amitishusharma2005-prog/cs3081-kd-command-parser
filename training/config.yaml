@@ -1,0 +1,22 @@
+# Single source of truth for `make train` (training/train.py reads only this file).
+seed: 42
+learning_rate: 2.0e-4
+batch_size: 8
+epochs: 8
+max_seq_length: 128
+library_versions:
+  torch: "2.5.1"
+  transformers: "4.47.1"
+  tokenizers: "0.21.0"
+  boto3: "1.35.90"
+  numpy: "1.26.4"
+  pyyaml: "6.0.2"
+
+# Not part of the required six items; supporting settings
+base_model: EleutherAI/pythia-70m
+warmup_ratio: 0.05          # linear warm-up then linear decay
+train_examples: 1500        # never more than the first 1,500 cleaned records
+train_file: datasets/v1/train.jsonl
+variants:                   # `make train VERSION=v2` -> second version
+  v1: {seed: 42, epochs: 8}
+  v2: {seed: 43, epochs: 8}

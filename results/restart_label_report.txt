@@ -1,0 +1,9 @@
+##### restart_label started 10:57 UTC = 16:27 IST
+### 1/4 stopping the stuck launcher and workers (saved labels stay in storage)
+job.batch "worker-0" deleted from pipeline namespace
+job.batch "worker-1" deleted from pipeline namespace
+### 2/4 restarting Ollama and testing one real request
+OLLAMA CHECK FAILED after 300s: ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"))
+probe failed - restarting Ollama again
+OLLAMA CHECK FAILED after 300s: ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)"))
+### STOPPED: Ollama is not giving correct answers. Send me the last 30 lines.

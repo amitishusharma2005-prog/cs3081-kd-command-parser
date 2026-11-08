@@ -1,0 +1,4 @@
+# buckets: datasets, models
+s3://datasets/commands_pool.jsonl  197541 bytes
+s3://datasets/teacher/shard-0.jsonl  262279 bytes
+s3://datasets/teacher/shard-1.jsonl  262161 bytes

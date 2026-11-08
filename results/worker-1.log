@@ -1,0 +1,10 @@
+# 2026-11-08T18:25:42.459395Z  $ kubectl -n pipeline logs job/worker-1  (exit 0)
+shard 1/2: 1500 commands, 1150 already done
+checkpoint 1200/1500
+checkpoint 1250/1500
+checkpoint 1300/1500
+checkpoint 1350/1500
+checkpoint 1400/1500
+checkpoint 1450/1500
+checkpoint 1500/1500
+done: wrote s3://datasets/teacher/shard-1.jsonl (1500 lines)

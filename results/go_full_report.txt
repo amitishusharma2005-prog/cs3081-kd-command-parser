@@ -1,0 +1,30 @@
+##### go_full started 22:57 IST
+### 1/6 docker and cluster
+NAME                          STATUS   ROLES           AGE   VERSION
+k3d-cs3081-cluster-server-0   Ready    control-plane   33h   v1.35.5+k3s1
+### 2/6 clearing old jobs, timers, state
+job.batch "worker-0" deleted from pipeline namespace
+job.batch "worker-1" deleted from pipeline namespace
+epochs: 6
+train_examples: 1500        # never more than the first 1,500 cleaned records
+  v1: {seed: 42, epochs: 6}
+  v2: {seed: 43, epochs: 6}
+state: {'preflight': 'done', 'cluster': 'done', 'ollama': 'done', 'label': 'pending'}
+               total        used        free      shared  buff/cache   available
+Mem:            5780        1182        2288           4        2460        4598
+### 3/6 Ollama: the CPU-only setup that gave correct labels earlier, plus one real test (first model load can take a few minutes)
+8:OPTIONS = {"temperature": 0, "seed": 42, "num_predict": 150, "stop": ["\nCommand:"], "num_gpu": 0}
+   224s correct=True | {"intent": "alarm_set", "date": "tomorrow", "time": "seven thirty am", "place": null}
+   5s correct=True | {"intent": "weather_query", "date": null, "time": null, "place": "london"}
+### 4/6 automatic cutoff at 02:30 IST (only fires if labelling is not finished by then)
+Running as unit: label-cutoff2.service; invocation ID: 39333cca74cb404286613234e0e4614c
+### 5/6 starting the full pipeline (labelling resumes from the saved labels)
+Running as unit: cs3081-run.service; invocation ID: 64d89ac080614f24b656f139547bde6d
+### 6/6 waiting 5 minutes to measure speed
+NAME             READY   STATUS    RESTARTS   AGE
+worker-0-7qcbx   1/1     Running   0          4m
+worker-1-xgj7h   1/1     Running   0          4m
+[pod/worker-0-7qcbx/worker] shard 0/2: 1500 commands, 1200 already done
+[pod/worker-1-xgj7h/worker] shard 1/2: 1500 commands, 1150 already done
+answered requests in the last 5 min: 34
+##### DONE 23:07 IST. Cutoff is armed for 02:30 IST.
