@@ -1,0 +1,70 @@
+# 2026-11-08T22:06:34Z rolling update v1 -> v2 under load
+deployment.apps/command-parser scaled
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 of 2 updated replicas are available...
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser env updated
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+# 2026-11-08T22:09:15Z rollback
+Warning: resource deployments/command-parser was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
+deployment.apps/command-parser rolled back
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser 
+REVISION  CHANGE-CAUSE
+2         <none>
+4         <none>
+5         <none>
+
+HTTP/1.1 200 OK
+X-Model-Version: v2
+X-Served-By: command-parser-f6d646bc5-g5qdd
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+POST     /parse                                                                               2500   4900   6300   8600  30000  30000  33000  39000  49000  49000  49000    116
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           2500   4900   6300   8600  30000  30000  33000  39000  49000  49000  49000    116
+
+Error report
+# occurrences      Error                                                                                               
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+17                 POST /parse: HTTP 0                                                                                 
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Successful requests by header:
+{
+  "per_replica": {
+    "command-parser-66d6994cd5-8j72r": 26,
+    "command-parser-66d6994cd5-j569n": 29,
+    "command-parser-f6d646bc5-g5qdd": 24,
+    "command-parser-f6d646bc5-wsfm7": 20
+  },
+  "per_model_version": {
+    "v1": 55,
+    "v2": 44
+  }
+}
+{
+  "per_replica": {
+    "command-parser-66d6994cd5-8j72r": 26,
+    "command-parser-66d6994cd5-j569n": 29,
+    "command-parser-f6d646bc5-g5qdd": 24,
+    "command-parser-f6d646bc5-wsfm7": 20
+  },
+  "per_model_version": {
+    "v1": 55,
+    "v2": 44
+  }
+}

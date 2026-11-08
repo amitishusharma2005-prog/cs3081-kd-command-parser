@@ -1,0 +1,161 @@
+{
+  "clean": {
+    "input": 3000,
+    "a": 1,
+    "b": 0,
+    "c": 10,
+    "d": 79,
+    "duplicates": 47,
+    "kept": 2863
+  },
+  "scores": {
+    "teacher": {
+      "json_validity": 99.0,
+      "intent_accuracy": 87.0,
+      "date_accuracy": 78.0,
+      "time_accuracy": 85.0,
+      "place_accuracy": 85.0,
+      "full_frame": 48.0,
+      "examples": 100,
+      "missing_predictions": 0
+    },
+    "untrained": {
+      "json_validity": 0.0,
+      "intent_accuracy": 0.0,
+      "date_accuracy": 0.0,
+      "time_accuracy": 0.0,
+      "place_accuracy": 0.0,
+      "full_frame": 0.0,
+      "examples": 100,
+      "missing_predictions": 0
+    },
+    "student_v1": {
+      "json_validity": 100.0,
+      "intent_accuracy": 88.0,
+      "date_accuracy": 87.0,
+      "time_accuracy": 90.0,
+      "place_accuracy": 80.0,
+      "full_frame": 53.0,
+      "examples": 100,
+      "missing_predictions": 0
+    },
+    "student_v2": {
+      "json_validity": 100.0,
+      "intent_accuracy": 83.0,
+      "date_accuracy": 82.0,
+      "time_accuracy": 88.0,
+      "place_accuracy": 83.0,
+      "full_frame": 48.0,
+      "examples": 100,
+      "missing_predictions": 0
+    }
+  },
+  "loadtest": {
+    "requests": 30893,
+    "failures": 30830,
+    "failure_percent": 99.796,
+    "p50_ms": 3.0,
+    "p95_ms": 6.0,
+    "rps": 261.496823823248
+  },
+  "headers": {
+    "per_replica": {
+      "command-parser-66d6994cd5-g4mbn": 132,
+      "command-parser-66d6994cd5-j569n": 131
+    },
+    "per_model_version": {
+      "v1": 263
+    }
+  },
+  "replica_share_percent": {
+    "command-parser-66d6994cd5-g4mbn": 50.19,
+    "command-parser-66d6994cd5-j569n": 49.81
+  },
+  "rollout": {
+    "requests": 116,
+    "failures": 17,
+    "failure_percent": 14.655,
+    "p50_ms": 2500.0,
+    "p95_ms": 30000.0,
+    "rps": 0.5323707586264477
+  },
+  "rollout_versions_seen": {
+    "v1": 55,
+    "v2": 44
+  },
+  "version_after_rollback": "v2",
+  "recovery_load": {
+    "requests": 61,
+    "failures": 20,
+    "failure_percent": 32.787,
+    "p50_ms": 4800.0,
+    "p95_ms": 36000.0,
+    "rps": 0.34299458339116434
+  },
+  "recovery_pods": {
+    "running_ready_pods_at_end": 2
+  },
+  "readiness": {
+    "samples": 40,
+    "saw_no_endpoints": true,
+    "later_had_endpoints": true
+  },
+  "hpa": {
+    "observations": 101,
+    "start_replicas": 2,
+    "max_replicas_seen": 2,
+    "final_replicas": 1,
+    "scaled_up_1_to_2": false,
+    "scaled_back_to_1": true
+  },
+  "coldstart": {
+    "per_run_seconds": {
+      "1": 81,
+      "2": 51,
+      "3": 80
+    },
+    "median_seconds": 80,
+    "definition": "per run = slowest new Pod, creationTimestamp -> Ready; median over runs"
+  },
+  "docker50": {
+    "ok": 50,
+    "oom_killed": "false",
+    "peak_mib_cgroup": 880.9,
+    "peak_mib_docker_stats": 673.7
+  },
+  "top": [
+    {
+      "pod": "command-parser-66d6994cd5-j569n",
+      "cpu": "412m",
+      "memory": "488Mi"
+    },
+    {
+      "pod": "command-parser-66d6994cd5-vz54w",
+      "cpu": "497m",
+      "memory": "476Mi"
+    }
+  ],
+  "cost": {
+    "requests": 30893,
+    "failures": 30830,
+    "error_rate_percent": 99.7961,
+    "p50_ms": 3.0,
+    "p95_ms": 6.0,
+    "requests_per_second": 261.496823823248,
+    "hourly_cost_per_replica": 3.95,
+    "hourly_cost_all_replicas": 7.9,
+    "requests_per_hour": 941388.5657636928,
+    "currency": "INR",
+    "cost_per_1000_requests": 0.0084,
+    "slo": ">= 99.0% of requests return HTTP 200 within 30 s over one 2-minute load-test run",
+    "error_budget_requests": 308.93,
+    "budget_used_requests": 30830,
+    "budget_used_percent": 9979.61
+  },
+  "image_size_mb": 1615.7,
+  "gitleaks_clean": null,
+  "failed_gate_run_url": null,
+  "passing_run_url": null,
+  "release_checksum_ok": true,
+  "unit_tests": "33"
+}

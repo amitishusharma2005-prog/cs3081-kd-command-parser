@@ -1,0 +1,4 @@
+# 2026-11-08T21:44:31Z kubectl top pods (during load test)
+NAME                              CPU(cores)   MEMORY(bytes)   
+command-parser-66d6994cd5-j569n   412m         488Mi           
+command-parser-66d6994cd5-vz54w   497m         476Mi           

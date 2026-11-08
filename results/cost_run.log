@@ -1,0 +1,18 @@
+# 2026-11-08T22:14:19.631375Z  $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/cost.py  (exit 0)
+{
+  "requests": 30893,
+  "failures": 30830,
+  "error_rate_percent": 99.7961,
+  "p50_ms": 3.0,
+  "p95_ms": 6.0,
+  "requests_per_second": 261.496823823248,
+  "hourly_cost_per_replica": 3.95,
+  "hourly_cost_all_replicas": 7.9,
+  "requests_per_hour": 941388.5657636928,
+  "currency": "INR",
+  "cost_per_1000_requests": 0.0084,
+  "slo": ">= 99.0% of requests return HTTP 200 within 30 s over one 2-minute load-test run",
+  "error_budget_requests": 308.93,
+  "budget_used_requests": 30830,
+  "budget_used_percent": 9979.61
+}

@@ -1,0 +1,28 @@
+# POST /parse through the Ingress (localhost:8080)
+HTTP/1.1 200 OK
+Content-Length: 67
+Content-Type: application/json
+Date: Sun, 08 Nov 2026 21:24:18 GMT
+Server: uvicorn
+X-Model-Version: v1
+X-Served-By: command-parser-66d6994cd5-7mrhm
+
+{"intent":"weather_query","date":null,"time":null,"place":"london"}
+HTTP/1.1 200 OK
+Content-Length: 78
+Content-Type: application/json
+Date: Sun, 08 Nov 2026 21:24:29 GMT
+Server: uvicorn
+X-Model-Version: v1
+X-Served-By: command-parser-66d6994cd5-2hl6c
+
+{"intent":"alarm_set","date":"tomorrow","time":"seven thirty am","place":null}
+HTTP/1.1 200 OK
+Content-Length: 67
+Content-Type: application/json
+Date: Sun, 08 Nov 2026 21:24:40 GMT
+Server: uvicorn
+X-Model-Version: v1
+X-Served-By: command-parser-66d6994cd5-7mrhm
+
+{"intent":"datetime_query","date":null,"time":null,"place":"tokyo"}

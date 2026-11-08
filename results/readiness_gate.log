@@ -1,0 +1,329 @@
+# 2026-11-08T21:34:36Z delete all pods, watch Service endpoints until the model has loaded
+pod "command-parser-66d6994cd5-4klpk" deleted from app namespace
+pod "command-parser-66d6994cd5-wp5cx" deleted from app namespace
+--- 2026-11-08T21:34:37Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc   <none>      11m
+NAME                              READY   STATUS              RESTARTS   AGE
+command-parser-66d6994cd5-4klpk   1/1     Terminating         0          6m50s
+command-parser-66d6994cd5-flknl   0/1     ContainerCreating   0          0s
+command-parser-66d6994cd5-tqnjq   0/1     ContainerCreating   0          0s
+command-parser-66d6994cd5-wp5cx   1/1     Terminating         0          5m22s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:35:03Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               12m
+NAME                              READY   STATUS        RESTARTS   AGE
+command-parser-66d6994cd5-4klpk   0/1     Terminating   0          7m18s
+command-parser-66d6994cd5-flknl   0/1     Running       0          28s
+command-parser-66d6994cd5-tqnjq   0/1     Running       0          28s
+command-parser-66d6994cd5-wp5cx   0/1     Terminating   0          5m50s
+ingress /parse -> HTTP 503
+--- 2026-11-08T21:35:08Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               12m
+NAME                              READY   STATUS        RESTARTS   AGE
+command-parser-66d6994cd5-4klpk   0/1     Terminating   0          7m23s
+command-parser-66d6994cd5-flknl   0/1     Running       0          33s
+command-parser-66d6994cd5-tqnjq   0/1     Running       0          33s
+command-parser-66d6994cd5-wp5cx   0/1     Terminating   0          5m55s
+ingress /parse -> HTTP 503
+--- 2026-11-08T21:35:13Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               12m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   0/1     Running   0          38s
+command-parser-66d6994cd5-tqnjq   0/1     Running   0          38s
+ingress /parse -> HTTP 503
+--- 2026-11-08T21:35:18Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               12m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   0/1     Running   0          43s
+command-parser-66d6994cd5-tqnjq   0/1     Running   0          43s
+ingress /parse -> HTTP 503
+--- 2026-11-08T21:35:24Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               12m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   0/1     Running   0          51s
+command-parser-66d6994cd5-tqnjq   0/1     Running   0          51s
+ingress /parse -> HTTP 503
+--- 2026-11-08T21:35:31Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               12m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   0/1     Running   0          56s
+command-parser-66d6994cd5-tqnjq   0/1     Running   0          56s
+ingress /parse -> HTTP 503
+--- 2026-11-08T21:35:36Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   12m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          60s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          60s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:35:42Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   12m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          66s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          66s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:35:48Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   12m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          72s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          72s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:35:55Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   12m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          78s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          78s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:36:01Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   13m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          85s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          85s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:36:09Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   13m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          93s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          93s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:36:15Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   13m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          99s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          99s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:36:21Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   13m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          105s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          105s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:36:28Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   13m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          112s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          112s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:36:34Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   13m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          118s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          118s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:36:41Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   13m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          2m6s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          2m6s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:36:52Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   13m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          2m16s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          2m16s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:37:00Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   14m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          2m24s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          2m24s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:37:07Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   14m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          2m31s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          2m31s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:37:15Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   14m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          2m39s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          2m39s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:37:23Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   14m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          2m47s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          2m47s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:37:31Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   14m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          2m55s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          2m55s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:37:38Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   14m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          3m2s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          3m2s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:37:46Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   14m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          3m10s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          3m10s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:37:53Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   14m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          3m17s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          3m17s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:38:01Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   15m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          3m25s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          3m25s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:38:09Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   15m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          3m33s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          3m33s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:38:17Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   15m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          3m41s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          3m41s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:38:24Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   15m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          3m48s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          3m48s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:38:31Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   15m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          3m55s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          3m55s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:38:41Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   15m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          4m5s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          4m5s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:38:48Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   15m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          4m12s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          4m12s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:38:56Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   16m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          4m20s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          4m20s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:39:03Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   16m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          4m27s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          4m27s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:39:09Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   16m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          4m33s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          4m33s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:39:16Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   16m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          4m40s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          4m40s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:39:23Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   16m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          4m47s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          4m47s
+ingress /parse -> HTTP 200
+--- 2026-11-08T21:39:31Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.160:8000,10.42.0.161:8000   16m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-66d6994cd5-flknl   1/1     Running   0          4m55s
+command-parser-66d6994cd5-tqnjq   1/1     Running   0          4m55s
+ingress /parse -> HTTP 200

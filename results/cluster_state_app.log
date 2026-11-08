@@ -1,0 +1,44 @@
+# 2026-11-08T21:24:18.669478Z  $ kubectl get ns,deploy,svc,ingress,hpa,pods -A -o wide  (exit 0)
+NAME                        STATUS   AGE
+namespace/app               Active   37h
+namespace/data              Active   37h
+namespace/default           Active   37h
+namespace/kube-node-lease   Active   37h
+namespace/kube-public       Active   37h
+namespace/kube-system       Active   37h
+namespace/pipeline          Active   37h
+
+NAMESPACE     NAME                                     READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS               IMAGES                                    SELECTOR
+app           deployment.apps/command-parser           2/2     2            2           82s   command-parser           command-parser:local                      app=command-parser
+data          deployment.apps/seaweedfs                1/1     1            1           36h   seaweedfs                chrislusf/seaweedfs:3.80                  app=seaweedfs
+kube-system   deployment.apps/coredns                  1/1     1            1           37h   coredns                  rancher/mirrored-coredns-coredns:1.14.3   k8s-app=kube-dns
+kube-system   deployment.apps/local-path-provisioner   1/1     1            1           37h   local-path-provisioner   rancher/local-path-provisioner:v0.0.36    app=local-path-provisioner
+kube-system   deployment.apps/metrics-server           1/1     1            1           37h   metrics-server           rancher/mirrored-metrics-server:v0.8.1    k8s-app=metrics-server
+kube-system   deployment.apps/traefik                  1/1     1            1           37h   traefik                  rancher/mirrored-library-traefik:3.6.13   app.kubernetes.io/instance=traefik-kube-system,app.kubernetes.io/name=traefik
+
+NAMESPACE     NAME                         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE   SELECTOR
+app           service/command-parser-svc   ClusterIP      10.43.127.228   <none>        8000/TCP                     81s   app=command-parser
+data          service/seaweedfs-s3         ClusterIP      10.43.119.102   <none>        8333/TCP                     36h   app=seaweedfs
+default       service/kubernetes           ClusterIP      10.43.0.1       <none>        443/TCP                      37h   <none>
+kube-system   service/kube-dns             ClusterIP      10.43.0.10      <none>        53/UDP,53/TCP,9153/TCP       37h   k8s-app=kube-dns
+kube-system   service/metrics-server       ClusterIP      10.43.73.242    <none>        443/TCP                      37h   k8s-app=metrics-server
+kube-system   service/traefik              LoadBalancer   10.43.95.207    172.19.0.2    80:30707/TCP,443:30989/TCP   37h   app.kubernetes.io/instance=traefik-kube-system,app.kubernetes.io/name=traefik
+
+NAMESPACE   NAME                                               CLASS     HOSTS   ADDRESS      PORTS   AGE
+app         ingress.networking.k8s.io/command-parser-ingress   traefik   *       172.19.0.2   80      81s
+
+NAMESPACE   NAME                                                     REFERENCE                   TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+app         horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: <unknown>/70%   1         2         2          81s
+
+NAMESPACE     NAME                                          READY   STATUS      RESTARTS         AGE     IP            NODE                          NOMINATED NODE   READINESS GATES
+app           pod/command-parser-66d6994cd5-2hl6c           1/1     Running     0                81s     10.42.0.155   k3d-cs3081-cluster-server-0   <none>           <none>
+app           pod/command-parser-66d6994cd5-7mrhm           1/1     Running     0                81s     10.42.0.154   k3d-cs3081-cluster-server-0   <none>           <none>
+data          pod/seaweedfs-7448b79f86-nxcs7                1/1     Running     1                3h58m   10.42.0.145   k3d-cs3081-cluster-server-0   <none>           <none>
+data          pod/seed-models-lb4c5                         0/1     Completed   0                11m     10.42.0.153   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/coredns-8db54c48d-jtvcr                   1/1     Running     1 (3h56m ago)    3h58m   10.42.0.144   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/local-path-provisioner-5d9d9885bc-mqm8h   1/1     Running     1 (3h56m ago)    3h58m   10.42.0.148   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/metrics-server-786d997795-dlnf8           1/1     Running     2 (3h54m ago)    3h58m   10.42.0.149   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/svclb-traefik-dfa8029c-2t7k2              2/2     Running     36 (3h56m ago)   37h     10.42.0.150   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/traefik-9bcdbbd9-58lq4                    1/1     Running     1                3h57m   10.42.0.146   k3d-cs3081-cluster-server-0   <none>           <none>
+pipeline      pod/worker-0-7qcbx                            0/1     Completed   0                3h51m   10.42.0.151   k3d-cs3081-cluster-server-0   <none>           <none>
+pipeline      pod/worker-1-xgj7h                            0/1     Completed   0                3h51m   10.42.0.152   k3d-cs3081-cluster-server-0   <none>           <none>
