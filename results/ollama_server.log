@@ -966,3 +966,18 @@ time=2026-11-08T22:50:55.137Z level=INFO source=routes.go:2586 msg="vram-based d
 [GIN] 2026/11/08 - 22:50:55 | 200 |    1.2ms |       127.0.0.1 | GET      "/api/tags"
 [GIN] 2026/11/08 - 23:38:47 | 200 |  46.66ms |             ::1 | GET      "/api/tags"
 [GIN] 2026/11/08 - 23:40:19 | 200 |  21.38ms |             ::1 | GET      "/api/tags"
+[GIN] 2026/11/08 - 23:42:12 | 200 |  32.51ms |             ::1 | GET      "/api/tags"
+time=2026-11-08T23:48:40.468Z level=INFO source=routes.go:2474 msg="server config" env="map[CUDA_VISIBLE_DEVICES: GGML_VK_VISIBLE_DEVICES: GPU_DEVICE_ORDINAL: HIP_VISIBLE_DEVICES: HSA_OVERRIDE_GFX_VERSION: HTTPS_PROXY: HTTP_PROXY: LLAMA_ARG_FIT: LLAMA_ARG_FIT_TARGET: NO_PROXY: OLLAMA_CONTEXT_LENGTH:0 OLLAMA_CREATE_REMOTE:false OLLAMA_DEBUG:INFO OLLAMA_DEBUG_LOG_REQUESTS:false OLLAMA_EDITOR: OLLAMA_FLASH_ATTENTION:false OLLAMA_GO_TEMPLATE:true OLLAMA_GPU_OVERHEAD:0 OLLAMA_HOST:http://0.0.0.0:11434 OLLAMA_IGPU_ENABLE: OLLAMA_KEEP_ALIVE:5m0s OLLAMA_KV_CACHE_TYPE: OLLAMA_LLM_LIBRARY: OLLAMA_LOAD_TIMEOUT:5m0s OLLAMA_MAX_LOADED_MODELS:0 OLLAMA_MAX_QUEUE:512 OLLAMA_MAX_TRANSFER_STREAMS:4 OLLAMA_MODELS:/home/student/.ollama/models OLLAMA_NOHISTORY:false OLLAMA_NOPRUNE:false OLLAMA_NO_CLOUD:false OLLAMA_NUM_PARALLEL:2 OLLAMA_ORIGINS:[http://localhost https://localhost http://localhost:* https://localhost:* http://127.0.0.1 https://127.0.0.1 http://127.0.0.1:* https://127.0.0.1:* http://0.0.0.0 https://0.0.0.0 http://0.0.0.0:* https://0.0.0.0:* app://* file://* tauri://* vscode-webview://* vscode-file://*] OLLAMA_REMOTES:[ollama.com] OLLAMA_SCHED_SPREAD:false OLLAMA_VULKAN:true ROCR_VISIBLE_DEVICES: http_proxy: https_proxy: no_proxy:]"
+time=2026-11-08T23:48:40.472Z level=INFO source=routes.go:2476 msg="Ollama cloud disabled: false"
+time=2026-11-08T23:48:40.480Z level=INFO source=images.go:1033 msg="total blobs: 6"
+time=2026-11-08T23:48:40.481Z level=INFO source=images.go:1042 msg="total unused blobs removed: 0"
+time=2026-11-08T23:48:40.488Z level=INFO source=routes.go:2536 msg="Listening on [::]:11434 (version 0.40.15)"
+time=2026-11-08T23:48:40.504Z level=INFO source=runner.go:60 msg="discovering available GPUs..."
+time=2026-11-08T23:48:42.022Z level=INFO source=model_recommendations.go:177 msg="model recommendations cache sleep scheduled" wait=4h46m44.794219773s consecutive_failures=0
+time=2026-11-08T23:48:51.593Z level=INFO source=types.go:32 msg="inference compute" id=0 filter_id=0 library=CUDA compute=7.5 name=CUDA0 description="NVIDIA GeForce GTX 1650" libdirs=ollama,cuda_v12 driver=12.5 pci_id=0000:01:00.0 type=discrete total="4.0 GiB" available="3.2 GiB"
+time=2026-11-08T23:48:51.593Z level=INFO source=routes.go:2586 msg="vram-based default context" total_vram="4.0 GiB" default_num_ctx=4096
+[GIN] 2026/11/08 - 23:48:51 | 500 |   4.48ms |             ::1 | GET      "/api/tags"
+[GIN] 2026/11/08 - 23:48:51 | 500 |    4.5ms |             ::1 | GET      "/api/tags"
+[GIN] 2026/11/08 - 23:48:51 | 200 |   6.12ms |             ::1 | GET      "/api/tags"
+[GIN] 2026/11/08 - 23:48:51 | 200 | 75.744µs |       127.0.0.1 | HEAD     "/"
+[GIN] 2026/11/08 - 23:48:51 | 200 | 765.503µs |       127.0.0.1 | GET      "/api/tags"

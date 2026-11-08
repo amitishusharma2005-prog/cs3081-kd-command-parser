@@ -21,7 +21,7 @@ KEYS = _SCHEMA["keys"]
 INTENTS = set(_SCHEMA["intents"])
 
 STATE = {"ready": False, "model": None, "tokenizer": None, "error": None}
-GEN_LOCK = threading.Semaphore(1)  # one generation at a time per pod keeps the 1-CPU pod from being throttled, so health probes stay responsive
+GEN_LOCK = threading.Semaphore(1)  # one generation at a time per pod: keeps health probes responsive
 
 
 def download_model(model_uri, endpoint, dest):

@@ -13211,3 +13211,26 @@ Stage 'ci' stopped. Fix the cause and run again; finished stages are skipped.
 [23:39:19] job: run stopped (attempt 2/3); retrying in 60 s
 [23:40:19] === STAGE ci ===
 [23:40:19] $ git add -A
+[23:40:19] $ git commit -m Evidence from deployment tests
+[main 9c3d773] Evidence from deployment tests
+ 3 files changed, 21 insertions(+)
+[23:40:19] $ git push -u origin main
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+   f2a28e0..9c3d773  main -> main
+branch 'main' set up to track 'origin/main'.
+[23:40:22] $ git tag -f final && git push -f origin final
+Updated tag 'final' (was f2a28e0)
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+ + f2a28e0...9c3d773 final -> final (forced update)
+[23:40:26] $ gh workflow run ci.yml -R amitishusharma2005-prog/cs3081-kd-command-parser -f candidate=untrained
+https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42536293520
+[23:41:12] untrained run https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42536293520: {'lint': 'failure', 'secret-scan': 'success', 'unit-tests': 'skipped', 'model-evaluation': 'skipped', 'quality-gate': 'skipped'}
+[23:41:12] STAGE_FAILED ci: expected the quality gate to FAIL for the untrained model, got {'lint': 'failure', 'secret-scan': 'success', 'unit-tests': 'skipped', 'model-evaluation': 'skipped', 'quality-gate': 'skipped'}
+
+Stage 'ci' stopped. Fix the cause and run again; finished stages are skipped.
+[23:41:12] job: run stopped (attempt 3/3); retrying in 60 s
+[23:42:12] job: gave up: send the last 30 lines of results/pipeline_run.log
+[23:48:33] job: started | up 6 hours, 21 minutes | memory: 1890/5780 MB used
+[23:48:36] job: starting Ollama on all interfaces
+[23:48:51] === STAGE ci ===
+[23:48:51] $ git add -A
