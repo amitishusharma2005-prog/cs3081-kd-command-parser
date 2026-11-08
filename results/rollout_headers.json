@@ -1,12 +1,12 @@
 {
   "per_replica": {
-    "command-parser-66d6994cd5-8j72r": 26,
-    "command-parser-66d6994cd5-j569n": 29,
-    "command-parser-f6d646bc5-g5qdd": 24,
-    "command-parser-f6d646bc5-wsfm7": 20
+    "command-parser-55d4dccb84-kfszn": 58,
+    "command-parser-55d4dccb84-6wj94": 71,
+    "command-parser-568fc864b-mkrk7": 76,
+    "command-parser-568fc864b-qvhvz": 70
   },
   "per_model_version": {
-    "v1": 55,
-    "v2": 44
+    "v1": 129,
+    "v2": 146
   }
 }

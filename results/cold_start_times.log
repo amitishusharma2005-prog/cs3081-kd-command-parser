@@ -1,32 +1,31 @@
-# 2026-11-08T21:39:38Z cold start x3 (delete all pods; time = pod creationTimestamp -> Ready)
-pod "command-parser-66d6994cd5-flknl" deleted from app namespace
-pod "command-parser-66d6994cd5-tqnjq" deleted from app namespace
-pod/command-parser-66d6994cd5-lgfbr condition met
-pod/command-parser-66d6994cd5-xw48v condition met
-run 1 pod/command-parser-66d6994cd5-lgfbr created=2026-11-08T21:39:39Z ready=2026-11-08T21:41:00Z seconds=81
+# 2026-11-08T23:04:31Z cold start x3 (delete all pods; time = pod creationTimestamp -> Ready)
+pod "command-parser-55d4dccb84-89k94" deleted from app namespace
+pod "command-parser-55d4dccb84-r5gbl" deleted from app namespace
+pod/command-parser-55d4dccb84-4ww87 condition met
+pod/command-parser-55d4dccb84-fwqgf condition met
+run 1 pod/command-parser-55d4dccb84-4ww87 created=2026-11-08T23:04:31Z ready=2026-11-08T23:04:54Z seconds=23
 downloaded 7 files from s3://models/v1/
 model ready
-run 1 pod/command-parser-66d6994cd5-xw48v created=2026-11-08T21:39:39Z ready=2026-11-08T21:40:59Z seconds=80
+run 1 pod/command-parser-55d4dccb84-fwqgf created=2026-11-08T23:04:31Z ready=2026-11-08T23:04:54Z seconds=23
 downloaded 7 files from s3://models/v1/
 model ready
-pod "command-parser-66d6994cd5-lgfbr" deleted from app namespace
-pod "command-parser-66d6994cd5-xw48v" deleted from app namespace
-pod/command-parser-66d6994cd5-5w7pp condition met
-pod/command-parser-66d6994cd5-l57kz condition met
-run 2 pod/command-parser-66d6994cd5-5w7pp created=2026-11-08T21:41:02Z ready=2026-11-08T21:41:52Z seconds=50
+pod "command-parser-55d4dccb84-4ww87" deleted from app namespace
+pod "command-parser-55d4dccb84-fwqgf" deleted from app namespace
+pod/command-parser-55d4dccb84-cm4rr condition met
+pod/command-parser-55d4dccb84-f4zzx condition met
+run 2 pod/command-parser-55d4dccb84-cm4rr created=2026-11-08T23:04:57Z ready=2026-11-08T23:05:56Z seconds=59
 downloaded 7 files from s3://models/v1/
 model ready
-run 2 pod/command-parser-66d6994cd5-l57kz created=2026-11-08T21:41:02Z ready=2026-11-08T21:41:53Z seconds=51
+run 2 pod/command-parser-55d4dccb84-f4zzx created=2026-11-08T23:04:57Z ready=2026-11-08T23:05:56Z seconds=59
 downloaded 7 files from s3://models/v1/
 model ready
-pod "command-parser-66d6994cd5-5w7pp" deleted from app namespace
-pod "command-parser-66d6994cd5-l57kz" deleted from app namespace
-I1108 21:43:01.310784   29446 reflector.go:664] "Warning: watch ended with error" reflector="k8s.io/client-go/tools/watch/informerwatcher.go:162" type="*unstructured.Unstructured" err="an error on the server (\"unable to decode an event from the watch stream: http2: client connection lost\") has prevented the request from succeeding"
-pod/command-parser-66d6994cd5-j569n condition met
-pod/command-parser-66d6994cd5-vz54w condition met
-run 3 pod/command-parser-66d6994cd5-j569n created=2026-11-08T21:41:54Z ready=2026-11-08T21:43:14Z seconds=80
+pod "command-parser-55d4dccb84-cm4rr" deleted from app namespace
+pod "command-parser-55d4dccb84-f4zzx" deleted from app namespace
+pod/command-parser-55d4dccb84-p4ngr condition met
+pod/command-parser-55d4dccb84-ttgfp condition met
+run 3 pod/command-parser-55d4dccb84-p4ngr created=2026-11-08T23:05:57Z ready=2026-11-08T23:06:55Z seconds=58
 downloaded 7 files from s3://models/v1/
 model ready
-run 3 pod/command-parser-66d6994cd5-vz54w created=2026-11-08T21:41:54Z ready=2026-11-08T21:43:14Z seconds=80
+run 3 pod/command-parser-55d4dccb84-ttgfp created=2026-11-08T23:05:57Z ready=2026-11-08T23:06:55Z seconds=58
 downloaded 7 files from s3://models/v1/
 model ready

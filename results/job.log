@@ -11474,3 +11474,1700 @@ report/report.pdf: 4 pages total (last page is References)
 reflection_draft_typed.pdf written (font 12.5 pt): print it, copy it BY HAND, scan the 3 pages to 230103033.pdf
 230103033.pdf already exists and was left untouched (your scan).
 [22:20:48] $ git add -A
+[22:20:48] $ git commit -m Final submission
+[main b67b592] Final submission
+ 6 files changed, 69 insertions(+), 9 deletions(-)
+ create mode 100644 results/gitleaks.log
+[22:20:48] $ git tag -f final
+Updated tag 'final' (was ad368c0)
+[22:20:48] $ git push -u origin main
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+   ad368c0..b67b592  main -> main
+branch 'main' set up to track 'origin/main'.
+[22:20:51] $ git tag -f final && git push -f origin final
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+ + ad368c0...b67b592 final -> final (forced update)
+[22:20:53] $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/check_submission.py
+PASS  k3d.yaml, teacher prompt
+PASS  every id in exactly one shard  [3000 lines, 3000 unique, pool 3000]
+PASS  train.sha256 matches train.jsonl
+PASS  counts add up  [{'input': 3000, 'a': 1, 'b': 0, 'c': 10, 'd': 79, 'duplicates': 47, 'kept': 2863}]
+PASS  config.yaml has the six items
+PASS  loss.csv one row per epoch  [8 rows]
+PASS  model.sha256 for v1 and v2
+PASS  results/teacher predictions + report
+PASS  results/untrained predictions + report
+PASS  results/student_v1 predictions + report
+PASS  results/student_v2 predictions + report
+PASS  student json_validity >= 95  [100.0]
+PASS  student full_frame >= half of teacher  [53.0 vs 48.0]
+PASS  service files
+PASS  pinned requirements
+PASS  manifests
+PASS  network files
+PASS  nacl_sim --check
+PASS  CI workflow, Makefile, AI_USE.md, README.md
+PASS  results/loadtest_stats.csv
+PASS  results/loadtest_headers.json
+PASS  results/docker_50req_limit_test.log
+PASS  results/readiness_gate.log
+PASS  results/hpa_scaling.log
+PASS  results/rolling_update_rollback.log
+PASS  results/pod_recovery.log
+PASS  results/cold_start_times.log
+PASS  results/kubectl_top_pods.log
+PASS  results/cost_slo.json
+PASS  report/report.pdf
+PASS  230103033.pdf (reflection)
+PASS  reflection is at most 3 pages
+PASS  report has no NOT MEASURED / NOT AVAILABLE placeholders
+PASS  report is at most 8 pages (references/appendices excluded: check by eye if it is longer)  [4]
+PASS  failed quality-gate CI run URL recorded
+PASS  230103033.pdf is your handwritten scan, not the typed placeholder  [replace it, then run scripts/seal_submission.py]
+PASS  git tag final
+PASS  no model weights tracked
+
+38/38 checks passed
+[22:20:53] $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/package_submission.py
+wrote 230103033.zip 3303514 bytes
+
+DONE. Submit ONLY ./230103033.zip
+[22:20:54] stage finalize done in 16s
+[22:20:55] job: FINISHED
+[22:50:28] job: started | up 5 hours, 23 minutes | memory: 1887/5780 MB used
+[22:50:34] job: starting Ollama on all interfaces
+[22:50:55] === STAGE deploy ===
+[22:50:55] $ make up
+k3d cluster list cs3081-cluster >/dev/null 2>&1 || k3d cluster create --config cluster/k3d.yaml
+bash scripts/secrets.sh
+scripts/secrets.sh: line 1: ﻿#!/usr/bin/env: No such file or directory
+namespace/data configured
+namespace/pipeline unchanged
+namespace/app configured
+secret/s3-credentials unchanged
+secret/s3-credentials unchanged
+secret/s3-credentials unchanged
+secret/seaweedfs-s3-config unchanged
+configmap/commands-pool unchanged
+configmap/seed-scripts unchanged
+configmap/model-checksums unchanged
+kubectl apply -f cluster/seaweedfs.yaml
+namespace/data configured
+persistentvolumeclaim/seaweedfs-data unchanged
+deployment.apps/seaweedfs unchanged
+service/seaweedfs-s3 unchanged
+job.batch/seed-buckets unchanged
+kubectl -n data rollout status deploy/seaweedfs --timeout=300s
+deployment "seaweedfs" successfully rolled out
+kubectl -n data wait --for=condition=complete job/seed-buckets --timeout=300s
+job.batch/seed-buckets condition met
+kubectl apply -f cluster/seed-models.yaml
+job.batch/seed-models unchanged
+kubectl -n data wait --for=condition=complete job/seed-models --timeout=600s
+job.batch/seed-models condition met
+make image
+make[1]: Entering directory '/home/student/cs3081-kd-command-parser'
+docker build -f service/Dockerfile -t command-parser:local .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 545B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/python:3.11-slim
+#2 DONE 2.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 96B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 4.88kB 0.0s done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.11-slim@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535
+#5 resolve docker.io/library/python:3.11-slim@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535
+#5 resolve docker.io/library/python:3.11-slim@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535 0.1s done
+#5 DONE 0.1s
+
+#6 [2/6] WORKDIR /app
+#6 CACHED
+
+#7 [3/6] COPY service/requirements.txt .
+#7 CACHED
+
+#8 [4/6] RUN pip install -r requirements.txt
+#8 CACHED
+
+#9 [5/6] COPY service/app.py .
+#9 DONE 0.1s
+
+#10 [6/6] COPY data/schema.json /app/schema.json
+#10 DONE 0.1s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 0.3s done
+#11 exporting manifest sha256:fc64084dc747847229f9082ca9d397b50bb0f078f8b403f247076ced53a01c45 0.0s done
+#11 exporting config sha256:a50bc342ca31aa9a7a560161c2c9e9ef38a882bfec40d374fd423c2281665221 0.1s done
+#11 exporting attestation manifest sha256:d72dc707140afa701ed0b335a5574eb2e78dc282cc4c02fe6c79ec944ecff549 0.0s done
+#11 exporting manifest list sha256:5bf64b79c568028d12bf23fd7324d899c481ce3da94ec524b00f7ea3ee393d66 0.0s done
+#11 naming to docker.io/library/command-parser:local
+#11 naming to docker.io/library/command-parser:local done
+#11 unpacking to docker.io/library/command-parser:local 0.1s done
+#11 DONE 0.7s
+k3d image import command-parser:local -c cs3081-cluster
+[36mINFO[0m[0000] Importing image(s) into cluster 'cs3081-cluster' 
+[36mINFO[0m[0000] Starting new tools node...                   
+[36mINFO[0m[0000] Starting node 'k3d-cs3081-cluster-tools'     
+[36mINFO[0m[0000] Saving 1 image(s) from runtime...            
+[36mINFO[0m[0066] Importing images into nodes...               
+[36mINFO[0m[0066] Importing images from tarball '/k3d/images/k3d-cs3081-cluster-images-20261108225104.tar' into node 'k3d-cs3081-cluster-server-0'... 
+[36mINFO[0m[0132] Removing the tarball(s) from image volume... 
+[36mINFO[0m[0134] Removing k3d-tools node...                   
+[36mINFO[0m[0134] Successfully imported image(s)               
+[36mINFO[0m[0134] Successfully imported 1 image(s) into 1 cluster(s) 
+make[1]: Leaving directory '/home/student/cs3081-kd-command-parser'
+kubectl apply -f cluster/app-deployment.yaml
+namespace/app configured
+deployment.apps/command-parser configured
+service/command-parser-svc unchanged
+ingress.networking.k8s.io/command-parser-ingress unchanged
+horizontalpodautoscaler.autoscaling/command-parser-hpa unchanged
+kubectl -n app rollout status deploy/command-parser --timeout=600s
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+echo "Ready: curl -X POST http://localhost:8080/parse -H 'content-type: application/json' -d '{\"text\":\"what is the weather in london\"}'"
+Ready: curl -X POST http://localhost:8080/parse -H 'content-type: application/json' -d '{"text":"what is the weather in london"}'
+[22:55:08] image size 1615.7 MB
+[22:55:08] $ kubectl get ns,deploy,svc,ingress,hpa,pods -A -o wide
+/home/student/cs3081-kd-command-parser/scripts/run_all.py:66: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  f.write(f"# {datetime.utcnow().isoformat()}Z  $ {cmd if shell else ' '.join(cmd)}  (exit {rc})\n{text}")
+NAME                        STATUS   AGE
+namespace/app               Active   38h
+namespace/data              Active   38h
+namespace/default           Active   38h
+namespace/kube-node-lease   Active   38h
+namespace/kube-public       Active   38h
+namespace/kube-system       Active   38h
+namespace/pipeline          Active   38h
+
+NAMESPACE     NAME                                     READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS               IMAGES                                    SELECTOR
+app           deployment.apps/command-parser           2/2     2            2           92m   command-parser           command-parser:local                      app=command-parser
+data          deployment.apps/seaweedfs                1/1     1            1           38h   seaweedfs                chrislusf/seaweedfs:3.80                  app=seaweedfs
+kube-system   deployment.apps/coredns                  1/1     1            1           38h   coredns                  rancher/mirrored-coredns-coredns:1.14.3   k8s-app=kube-dns
+kube-system   deployment.apps/local-path-provisioner   1/1     1            1           38h   local-path-provisioner   rancher/local-path-provisioner:v0.0.36    app=local-path-provisioner
+kube-system   deployment.apps/metrics-server           0/1     1            0           38h   metrics-server           rancher/mirrored-metrics-server:v0.8.1    k8s-app=metrics-server
+kube-system   deployment.apps/traefik                  1/1     1            1           38h   traefik                  rancher/mirrored-library-traefik:3.6.13   app.kubernetes.io/instance=traefik-kube-system,app.kubernetes.io/name=traefik
+
+NAMESPACE     NAME                         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE   SELECTOR
+app           service/command-parser-svc   ClusterIP      10.43.127.228   <none>        8000/TCP                     92m   app=command-parser
+data          service/seaweedfs-s3         ClusterIP      10.43.119.102   <none>        8333/TCP                     38h   app=seaweedfs
+default       service/kubernetes           ClusterIP      10.43.0.1       <none>        443/TCP                      38h   <none>
+kube-system   service/kube-dns             ClusterIP      10.43.0.10      <none>        53/UDP,53/TCP,9153/TCP       38h   k8s-app=kube-dns
+kube-system   service/metrics-server       ClusterIP      10.43.73.242    <none>        443/TCP                      38h   k8s-app=metrics-server
+kube-system   service/traefik              LoadBalancer   10.43.95.207    172.19.0.2    80:30707/TCP,443:30989/TCP   38h   app.kubernetes.io/instance=traefik-kube-system,app.kubernetes.io/name=traefik
+
+NAMESPACE   NAME                                               CLASS     HOSTS   ADDRESS      PORTS   AGE
+app         ingress.networking.k8s.io/command-parser-ingress   traefik   *       172.19.0.2   80      92m
+
+NAMESPACE   NAME                                                     REFERENCE                   TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+app         horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: <unknown>/70%   1         2         2          92m
+
+NAMESPACE     NAME                                          READY   STATUS        RESTARTS         AGE     IP            NODE                          NOMINATED NODE   READINESS GATES
+app           pod/command-parser-55d4dccb84-fkpb6           1/1     Running       0                80s     10.42.0.177   k3d-cs3081-cluster-server-0   <none>           <none>
+app           pod/command-parser-55d4dccb84-vllr2           1/1     Running       0                109s    10.42.0.176   k3d-cs3081-cluster-server-0   <none>           <none>
+app           pod/command-parser-66d6994cd5-xrpv2           1/1     Terminating   1 (41m ago)      44m     10.42.0.173   k3d-cs3081-cluster-server-0   <none>           <none>
+data          pod/seaweedfs-7448b79f86-nxcs7                1/1     Running       1                5h28m   10.42.0.145   k3d-cs3081-cluster-server-0   <none>           <none>
+data          pod/seed-models-lb4c5                         0/1     Completed     0                102m    10.42.0.153   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/coredns-8db54c48d-jtvcr                   1/1     Running       1 (5h27m ago)    5h28m   10.42.0.144   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/local-path-provisioner-5d9d9885bc-mqm8h   1/1     Running       1 (5h27m ago)    5h28m   10.42.0.148   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/metrics-server-786d997795-dlnf8           0/1     Running       3 (71m ago)      5h28m   10.42.0.149   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/svclb-traefik-dfa8029c-2t7k2              2/2     Running       36 (5h27m ago)   38h     10.42.0.150   k3d-cs3081-cluster-server-0   <none>           <none>
+kube-system   pod/traefik-9bcdbbd9-58lq4                    1/1     Running       1                5h28m   10.42.0.146   k3d-cs3081-cluster-server-0   <none>           <none>
+pipeline      pod/worker-0-7qcbx                            0/1     Completed     0                5h22m   10.42.0.151   k3d-cs3081-cluster-server-0   <none>           <none>
+pipeline      pod/worker-1-xgj7h                            0/1     Completed     0                5h22m   10.42.0.152   k3d-cs3081-cluster-server-0   <none>           <none>
+[22:55:10] $ kubectl -n app get deploy command-parser -o yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "6"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"command-parser","namespace":"app"},"spec":{"replicas":2,"selector":{"matchLabels":{"app":"command-parser"}},"strategy":{"rollingUpdate":{"maxSurge":1,"maxUnavailable":0},"type":"RollingUpdate"},"template":{"metadata":{"labels":{"app":"command-parser"}},"spec":{"containers":[{"env":[{"name":"MODEL_URI","value":"s3://models/v1/"},{"name":"MODEL_VERSION","value":"v1"},{"name":"S3_ENDPOINT","value":"http://seaweedfs-s3.data.svc.cluster.local:8333"},{"name":"MAX_NEW_TOKENS","value":"96"},{"name":"FAULT_INJECT","value":"0"},{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}},{"name":"AWS_ACCESS_KEY_ID","valueFrom":{"secretKeyRef":{"key":"AWS_ACCESS_KEY_ID","name":"s3-credentials"}}},{"name":"AWS_SECRET_ACCESS_KEY","valueFrom":{"secretKeyRef":{"key":"AWS_SECRET_ACCESS_KEY","name":"s3-credentials"}}}],"image":"command-parser:local","imagePullPolicy":"IfNotPresent","lifecycle":{"preStop":{"exec":{"command":["sleep","8"]}}},"livenessProbe":{"failureThreshold":6,"httpGet":{"path":"/healthz","port":8000},"initialDelaySeconds":30,"periodSeconds":15,"timeoutSeconds":10},"name":"command-parser","ports":[{"containerPort":8000}],"readinessProbe":{"failureThreshold":6,"httpGet":{"path":"/readyz","port":8000},"initialDelaySeconds":3,"periodSeconds":5,"timeoutSeconds":5},"resources":{"limits":{"cpu":"1","memory":"1Gi"},"requests":{"cpu":"250m","memory":"512Mi"}}}],"terminationGracePeriodSeconds":30}}}}
+  creationTimestamp: "2026-11-08T21:22:56Z"
+  generation: 12
+  name: command-parser
+  namespace: app
+  resourceVersion: "54548"
+  uid: 69704a1e-ae69-4476-87e8-b70280df7f64
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: command-parser
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: command-parser
+    spec:
+      containers:
+      - env:
+        - name: MODEL_URI
+          value: s3://models/v1/
+        - name: MODEL_VERSION
+          value: v1
+        - name: S3_ENDPOINT
+          value: http://seaweedfs-s3.data.svc.cluster.local:8333
+        - name: MAX_NEW_TOKENS
+          value: "96"
+        - name: FAULT_INJECT
+          value: "0"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              key: AWS_ACCESS_KEY_ID
+              name: s3-credentials
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: AWS_SECRET_ACCESS_KEY
+              name: s3-credentials
+        image: command-parser:local
+        imagePullPolicy: IfNotPresent
+        lifecycle:
+          preStop:
+            exec:
+              command:
+              - sleep
+              - "8"
+        livenessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /healthz
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: command-parser
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /readyz
+            port: 8000
+            scheme: HTTP
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: "2026-11-08T22:53:34Z"
+    lastUpdateTime: "2026-11-08T22:53:34Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2026-11-08T21:22:57Z"
+    lastUpdateTime: "2026-11-08T22:55:07Z"
+    message: ReplicaSet "command-parser-55d4dccb84" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 12
+  readyReplicas: 2
+  replicas: 2
+  terminatingReplicas: 1
+  updatedReplicas: 2
+[22:55:37] $ kubectl -n app set env deploy/command-parser FAULT_INJECT=1 && kubectl -n app rollout status deploy/command-parser --timeout=600s
+deployment.apps/command-parser env updated
+Waiting for deployment spec update to be observed...
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+[22:57:24] $ kubectl -n app set env deploy/command-parser FAULT_INJECT=0 && kubectl -n app rollout status deploy/command-parser --timeout=600s
+deployment.apps/command-parser env updated
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+[22:58:51] stage deploy done in 476s
+[22:58:51] === STAGE evidence ===
+[22:58:53] $ bash scripts/evidence.sh docker50
+# 2026-11-08T22:58:56Z docker run --cpus=1.0 --memory=1g command-parser:local
+healthz 000 readyz 000
+healthz 200 readyz 503
+healthz 200 readyz 503
+healthz 200 readyz 503
+healthz 200 readyz 503
+healthz 200 readyz 503
+healthz 200 readyz 503
+healthz 200 readyz 503
+healthz 200 readyz 503
+healthz 200 readyz 503
+healthz 200 readyz 503
+healthz 200 readyz 200
+request 1 -> HTTP 200, mem 477.3MiB
+request 2 -> HTTP 200, mem 479.6MiB
+request 3 -> HTTP 200, mem 478.8MiB
+request 4 -> HTTP 200, mem 479.2MiB
+request 5 -> HTTP 200, mem 478.9MiB
+request 6 -> HTTP 200, mem 479.2MiB
+request 7 -> HTTP 200, mem 479.2MiB
+request 8 -> HTTP 200, mem 479MiB
+request 9 -> HTTP 200, mem 479MiB
+request 10 -> HTTP 200, mem 479.2MiB
+request 11 -> HTTP 200, mem 479.2MiB
+request 12 -> HTTP 200, mem 479.5MiB
+request 13 -> HTTP 200, mem 479.5MiB
+request 14 -> HTTP 200, mem 479.5MiB
+request 15 -> HTTP 200, mem 479.3MiB
+request 16 -> HTTP 200, mem 479.8MiB
+request 17 -> HTTP 200, mem 479.7MiB
+request 18 -> HTTP 200, mem 479.7MiB
+request 19 -> HTTP 200, mem 479.3MiB
+request 20 -> HTTP 200, mem 479.6MiB
+request 21 -> HTTP 200, mem 479.6MiB
+request 22 -> HTTP 200, mem 479.9MiB
+request 23 -> HTTP 200, mem 479.6MiB
+request 24 -> HTTP 200, mem 479.9MiB
+request 25 -> HTTP 200, mem 479.4MiB
+request 26 -> HTTP 200, mem 479.7MiB
+request 27 -> HTTP 200, mem 479.4MiB
+request 28 -> HTTP 200, mem 479.5MiB
+request 29 -> HTTP 200, mem 479.2MiB
+request 30 -> HTTP 200, mem 480MiB
+request 31 -> HTTP 200, mem 479.2MiB
+request 32 -> HTTP 200, mem 479.5MiB
+request 33 -> HTTP 200, mem 479.5MiB
+request 34 -> HTTP 200, mem 480.4MiB
+request 35 -> HTTP 200, mem 478.8MiB
+request 36 -> HTTP 200, mem 479.3MiB
+request 37 -> HTTP 200, mem 479.1MiB
+request 38 -> HTTP 200, mem 478.8MiB
+request 39 -> HTTP 200, mem 478.6MiB
+request 40 -> HTTP 200, mem 479.4MiB
+request 41 -> HTTP 200, mem 478.9MiB
+request 42 -> HTTP 200, mem 478.6MiB
+request 43 -> HTTP 200, mem 479.6MiB
+request 44 -> HTTP 200, mem 479.4MiB
+request 45 -> HTTP 200, mem 479.2MiB
+request 46 -> HTTP 200, mem 479.4MiB
+request 47 -> HTTP 200, mem 479.2MiB
+request 48 -> HTTP 200, mem 478.9MiB
+request 49 -> HTTP 200, mem 479MiB
+request 50 -> HTTP 200, mem 479MiB
+ok=50/50
+CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT   MEM %     NET I/O          BLOCK I/O       PIDS
+e27f95e942e7   cp-limit   0.15%     478.7MiB / 1GiB     46.75%    287MB / 1.09MB   354MB / 287MB   14
+OOMKilled: false
+peak memory (cgroup): 1038163968
+[23:01:41] $ bash scripts/evidence.sh readiness
+# 2026-11-08T23:01:41Z delete all pods, watch Service endpoints until the model has loaded
+pod "command-parser-55d4dccb84-9rjhm" deleted from app namespace
+pod "command-parser-55d4dccb84-d4q8t" deleted from app namespace
+--- 2026-11-08T23:01:42Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc   <none>      98m
+NAME                              READY   STATUS              RESTARTS   AGE
+command-parser-55d4dccb84-89k94   0/1     ContainerCreating   0          4s
+command-parser-55d4dccb84-9rjhm   1/1     Terminating         0          4m21s
+command-parser-55d4dccb84-d4q8t   1/1     Terminating         0          3m57s
+command-parser-55d4dccb84-r5gbl   0/1     ContainerCreating   0          4s
+ingress /parse -> HTTP 503
+--- 2026-11-08T23:01:49Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               99m
+NAME                              READY   STATUS        RESTARTS   AGE
+command-parser-55d4dccb84-89k94   0/1     Running       0          17s
+command-parser-55d4dccb84-9rjhm   1/1     Terminating   0          4m34s
+command-parser-55d4dccb84-d4q8t   1/1     Terminating   0          4m10s
+command-parser-55d4dccb84-r5gbl   0/1     Running       0          17s
+ingress /parse -> HTTP 503
+--- 2026-11-08T23:02:02Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               99m
+NAME                              READY   STATUS        RESTARTS   AGE
+command-parser-55d4dccb84-89k94   0/1     Running       0          21s
+command-parser-55d4dccb84-9rjhm   1/1     Terminating   0          4m38s
+command-parser-55d4dccb84-d4q8t   1/1     Terminating   0          4m14s
+command-parser-55d4dccb84-r5gbl   0/1     Running       0          21s
+ingress /parse -> HTTP 503
+--- 2026-11-08T23:02:06Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               99m
+NAME                              READY   STATUS        RESTARTS   AGE
+command-parser-55d4dccb84-89k94   0/1     Running       0          25s
+command-parser-55d4dccb84-9rjhm   1/1     Terminating   0          4m42s
+command-parser-55d4dccb84-d4q8t   1/1     Terminating   0          4m18s
+command-parser-55d4dccb84-r5gbl   0/1     Running       0          25s
+ingress /parse -> HTTP 503
+--- 2026-11-08T23:02:10Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   0/1     Running   0          29s
+command-parser-55d4dccb84-r5gbl   0/1     Running   0          29s
+ingress /parse -> HTTP 503
+--- 2026-11-08T23:02:14Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   0/1     Running   0          32s
+command-parser-55d4dccb84-r5gbl   0/1     Running   0          32s
+ingress /parse -> HTTP 503
+--- 2026-11-08T23:02:17Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS   AGE
+command-parser-svc               99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   0/1     Running   0          36s
+command-parser-55d4dccb84-r5gbl   0/1     Running   0          36s
+ingress /parse -> HTTP 503
+--- 2026-11-08T23:02:21Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          39s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          39s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:02:26Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          44s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          44s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:02:31Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          50s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          50s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:02:35Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          54s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          54s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:02:40Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          58s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          58s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:02:44Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          62s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          62s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:02:48Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          66s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          66s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:02:51Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          70s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          70s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:02:55Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   99m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          74s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          74s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:00Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          78s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          78s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:03Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          82s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          82s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:07Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          85s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          85s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:11Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          89s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          89s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:15Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          93s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          93s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:18Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          96s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          96s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:22Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          100s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          100s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:26Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          104s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          104s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:30Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          108s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          108s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:34Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          112s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          112s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:37Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          117s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          117s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:42Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m1s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m1s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:46Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m4s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m4s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:50Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m8s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m8s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:53Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   100m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m12s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m12s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:03:57Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   101m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m15s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m15s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:04:01Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   101m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m19s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m19s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:04:05Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   101m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m23s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m23s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:04:08Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   101m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m27s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m27s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:04:12Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   101m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m30s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m30s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:04:16Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   101m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m34s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m34s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:04:20Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   101m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m38s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m38s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:04:24Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   101m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m42s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m42s
+ingress /parse -> HTTP 200
+--- 2026-11-08T23:04:27Z
+Warning: v1 Endpoints is deprecated in v1.33+; use discovery.k8s.io/v1 EndpointSlice
+NAME                 ENDPOINTS                           AGE
+command-parser-svc   10.42.0.182:8000,10.42.0.183:8000   101m
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-89k94   1/1     Running   0          2m46s
+command-parser-55d4dccb84-r5gbl   1/1     Running   0          2m46s
+ingress /parse -> HTTP 200
+[23:04:31] $ bash scripts/evidence.sh coldstart
+# 2026-11-08T23:04:31Z cold start x3 (delete all pods; time = pod creationTimestamp -> Ready)
+pod "command-parser-55d4dccb84-89k94" deleted from app namespace
+pod "command-parser-55d4dccb84-r5gbl" deleted from app namespace
+pod/command-parser-55d4dccb84-4ww87 condition met
+pod/command-parser-55d4dccb84-fwqgf condition met
+run 1 pod/command-parser-55d4dccb84-4ww87 created=2026-11-08T23:04:31Z ready=2026-11-08T23:04:54Z seconds=23
+downloaded 7 files from s3://models/v1/
+model ready
+run 1 pod/command-parser-55d4dccb84-fwqgf created=2026-11-08T23:04:31Z ready=2026-11-08T23:04:54Z seconds=23
+downloaded 7 files from s3://models/v1/
+model ready
+pod "command-parser-55d4dccb84-4ww87" deleted from app namespace
+pod "command-parser-55d4dccb84-fwqgf" deleted from app namespace
+pod/command-parser-55d4dccb84-cm4rr condition met
+pod/command-parser-55d4dccb84-f4zzx condition met
+run 2 pod/command-parser-55d4dccb84-cm4rr created=2026-11-08T23:04:57Z ready=2026-11-08T23:05:56Z seconds=59
+downloaded 7 files from s3://models/v1/
+model ready
+run 2 pod/command-parser-55d4dccb84-f4zzx created=2026-11-08T23:04:57Z ready=2026-11-08T23:05:56Z seconds=59
+downloaded 7 files from s3://models/v1/
+model ready
+pod "command-parser-55d4dccb84-cm4rr" deleted from app namespace
+pod "command-parser-55d4dccb84-f4zzx" deleted from app namespace
+pod/command-parser-55d4dccb84-p4ngr condition met
+pod/command-parser-55d4dccb84-ttgfp condition met
+run 3 pod/command-parser-55d4dccb84-p4ngr created=2026-11-08T23:05:57Z ready=2026-11-08T23:06:55Z seconds=58
+downloaded 7 files from s3://models/v1/
+model ready
+run 3 pod/command-parser-55d4dccb84-ttgfp created=2026-11-08T23:05:57Z ready=2026-11-08T23:06:55Z seconds=58
+downloaded 7 files from s3://models/v1/
+model ready
+Take the median of the per-pod 'seconds' values (or the slowest pod per run) and state which you used.
+[23:06:57] $ bash scripts/evidence.sh top
+deployment.apps/command-parser scaled
+deployment "command-parser" successfully rolled out
+# 2026-11-08T23:08:13Z kubectl top pods (during load test)
+NAME                              CPU(cores)   MEMORY(bytes)   
+command-parser-55d4dccb84-p4ngr   1000m        521Mi           
+command-parser-55d4dccb84-ttgfp   998m         469Mi           
+[23:08:58] $ bash scripts/evidence.sh hpa
+# 2026-11-08T23:08:58Z HPA scaling test
+NAME                 REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          106m
+deployment.apps/command-parser scaled
+--- 2026-11-08T23:08:59Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          106m
+
+NAME                                  READY   STATUS        RESTARTS   AGE
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running       0          3m2s
+pod/command-parser-55d4dccb84-ttgfp   1/1     Terminating   0          3m2s
+--- 2026-11-08T23:09:09Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         1          106m
+
+NAME                                  READY   STATUS        RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   0/1     Running       0          2s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running       0          3m12s
+pod/command-parser-55d4dccb84-ttgfp   1/1     Terminating   0          3m12s
+--- 2026-11-08T23:09:19Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         1          106m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   0/1     Running   0          13s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          3m23s
+--- 2026-11-08T23:09:30Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 397%/70%   1         2         2          106m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          23s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          3m33s
+--- 2026-11-08T23:09:40Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 397%/70%   1         2         2          106m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          34s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          3m44s
+--- 2026-11-08T23:09:51Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 386%/70%   1         2         2          106m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          44s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          3m54s
+--- 2026-11-08T23:10:01Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 386%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          55s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m5s
+--- 2026-11-08T23:10:12Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          65s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m15s
+--- 2026-11-08T23:10:22Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          75s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m25s
+--- 2026-11-08T23:10:32Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          85s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m35s
+--- 2026-11-08T23:10:42Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          95s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m45s
+--- 2026-11-08T23:10:52Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 394%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          105s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m55s
+--- 2026-11-08T23:11:02Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 394%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          116s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m6s
+--- 2026-11-08T23:11:13Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m6s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m16s
+--- 2026-11-08T23:11:23Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m16s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m26s
+--- 2026-11-08T23:11:33Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m26s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m36s
+--- 2026-11-08T23:11:43Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 392%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m36s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m46s
+--- 2026-11-08T23:11:53Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m47s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m57s
+--- 2026-11-08T23:12:04Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m57s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m7s
+--- 2026-11-08T23:12:14Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 394%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m7s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m17s
+--- 2026-11-08T23:12:24Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 395%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m17s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m27s
+--- 2026-11-08T23:12:34Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 395%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m27s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m37s
+--- 2026-11-08T23:12:44Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 397%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m38s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m48s
+--- 2026-11-08T23:12:55Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 395%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m48s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m58s
+--- 2026-11-08T23:13:05Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 395%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m58s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m8s
+--- 2026-11-08T23:13:15Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 390%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m8s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m18s
+--- 2026-11-08T23:13:25Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m18s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m28s
+--- 2026-11-08T23:13:35Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m29s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m39s
+--- 2026-11-08T23:13:46Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 393%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m39s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m49s
+--- 2026-11-08T23:13:56Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 337%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m49s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m59s
+--- 2026-11-08T23:14:06Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 337%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m59s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m9s
+--- 2026-11-08T23:14:16Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m10s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m20s
+--- 2026-11-08T23:14:27Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 385%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m20s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m30s
+--- 2026-11-08T23:14:37Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m30s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m40s
+--- 2026-11-08T23:14:47Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m40s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m50s
+--- 2026-11-08T23:14:57Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m51s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m1s
+--- 2026-11-08T23:15:08Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 393%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m1s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m11s
+--- 2026-11-08T23:15:18Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 393%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m11s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m21s
+--- 2026-11-08T23:15:28Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 320%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m21s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m31s
+--- 2026-11-08T23:15:38Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 135%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m31s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m41s
+--- 2026-11-08T23:15:48Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 135%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m41s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m51s
+--- 2026-11-08T23:15:58Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m51s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:08Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m1s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:18Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m11s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:28Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m21s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:38Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m31s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:48Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m41s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:59Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m52s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:09Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m2s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:19Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m12s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:29Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m22s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:39Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m32s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:49Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m42s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:59Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m52s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:09Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m2s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:19Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m12s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:29Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m22s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:39Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m33s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:50Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m43s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:19:00Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m53s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+# load finished, waiting for scale-down
+--- 2026-11-08T23:19:10Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          10m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+--- 2026-11-08T23:19:25Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          10m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+--- 2026-11-08T23:19:40Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          10m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+--- 2026-11-08T23:19:55Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          10m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+--- 2026-11-08T23:20:10Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          117m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          11m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          14m
+--- 2026-11-08T23:20:25Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          117m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          11m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          14m
+--- 2026-11-08T23:20:40Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          117m
+
+NAME                                  READY   STATUS        RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running       0          11m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Terminating   0          14m
+--- 2026-11-08T23:20:56Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          117m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          11m
+--- 2026-11-08T23:21:11Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          118m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          12m
+--- 2026-11-08T23:21:26Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          118m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          12m
+--- 2026-11-08T23:21:41Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          118m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          12m
+--- 2026-11-08T23:21:56Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          118m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          12m
+--- 2026-11-08T23:22:11Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          119m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          13m
+--- 2026-11-08T23:22:27Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          119m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          13m
+--- 2026-11-08T23:22:42Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          119m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          13m
+--- 2026-11-08T23:22:57Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          120m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          13m
+--- 2026-11-08T23:23:12Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          120m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          14m
+--- 2026-11-08T23:23:28Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          120m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          14m
+--- 2026-11-08T23:23:43Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          120m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          14m
+--- 2026-11-08T23:23:59Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          121m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          14m
+--- 2026-11-08T23:24:14Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          121m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          15m
+--- 2026-11-08T23:24:29Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          121m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          15m
+--- 2026-11-08T23:24:44Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          121m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          15m
+--- 2026-11-08T23:25:00Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          122m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          15m
+--- 2026-11-08T23:25:15Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          122m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          16m
+--- 2026-11-08T23:25:30Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          122m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          16m
+--- 2026-11-08T23:25:45Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          122m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          16m
+--- 2026-11-08T23:26:00Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          123m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          16m
+--- 2026-11-08T23:26:15Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          123m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          17m
+--- 2026-11-08T23:26:30Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          123m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          17m
+--- 2026-11-08T23:26:45Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          123m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          17m
+--- 2026-11-08T23:27:01Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          124m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          17m
+--- 2026-11-08T23:27:16Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          124m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          18m
+--- 2026-11-08T23:27:31Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          124m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          18m
+--- 2026-11-08T23:27:47Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          124m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          18m
+--- 2026-11-08T23:28:02Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          125m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          18m
+--- 2026-11-08T23:28:17Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          125m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          19m
+--- 2026-11-08T23:28:32Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          125m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          19m
+--- 2026-11-08T23:28:48Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          125m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          19m
+--- 2026-11-08T23:29:03Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          126m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          19m
+[23:29:18] $ bash scripts/evidence.sh rollout
+# 2026-11-08T23:29:18Z rolling update v1 -> v2 under load
+deployment.apps/command-parser scaled
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 of 2 updated replicas are available...
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser env updated
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+# 2026-11-08T23:32:38Z rollback
+Warning: resource deployments/command-parser was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
+deployment.apps/command-parser rolled back
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser 
+REVISION  CHANGE-CAUSE
+2         <none>
+4         <none>
+5         <none>
+7         <none>
+9         <none>
+10        <none>
+
+check 1 after rollback (2026-11-08T23:33:57Z)
+HTTP/1.1 200 OK
+X-Model-Version: v1
+X-Served-By: command-parser-55d4dccb84-7sdkz
+POST     /parse                                                                               1800   2300   2600   2900   7200  13000  21000  31000  45000  45000  45000    281
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           1800   2300   2600   2900   7200  13000  21000  31000  45000  45000  45000    281
+
+Error report
+# occurrences      Error                                                                                               
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+5                  POST /parse: HTTP 0                                                                                 
+1                  POST /parse: HTTP 502                                                                               
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Successful requests by header:
+{
+  "per_replica": {
+    "command-parser-55d4dccb84-kfszn": 58,
+    "command-parser-55d4dccb84-6wj94": 71,
+    "command-parser-568fc864b-mkrk7": 76,
+    "command-parser-568fc864b-qvhvz": 70
+  },
+  "per_model_version": {
+    "v1": 129,
+    "v2": 146
+  }
+}
+{
+  "per_replica": {
+    "command-parser-55d4dccb84-kfszn": 58,
+    "command-parser-55d4dccb84-6wj94": 71,
+    "command-parser-568fc864b-mkrk7": 76,
+    "command-parser-568fc864b-qvhvz": 70
+  },
+  "per_model_version": {
+    "v1": 129,
+    "v2": 146
+  }
+}[23:34:12] $ bash scripts/evidence.sh recovery
+# 2026-11-08T23:34:12Z pod recovery under load
+deployment.apps/command-parser scaled
+deployment "command-parser" successfully rolled out
+deleting pod/command-parser-55d4dccb84-7sdkz
+pod "command-parser-55d4dccb84-7sdkz" deleted from app namespace
+--- 2026-11-08T23:34:44Z
+NAME                              READY   STATUS              RESTARTS   AGE
+command-parser-55d4dccb84-7sdkz   1/1     Terminating         0          2m6s
+command-parser-55d4dccb84-m7vcm   0/1     ContainerCreating   0          1s
+command-parser-55d4dccb84-vv2pd   1/1     Running             0          67s
+--- 2026-11-08T23:34:52Z
+NAME                              READY   STATUS        RESTARTS   AGE
+command-parser-55d4dccb84-7sdkz   1/1     Terminating   0          2m14s
+command-parser-55d4dccb84-m7vcm   0/1     Running       0          9s
+command-parser-55d4dccb84-vv2pd   1/1     Running       0          75s
+--- 2026-11-08T23:34:58Z
+NAME                              READY   STATUS        RESTARTS   AGE
+command-parser-55d4dccb84-7sdkz   1/1     Terminating   0          2m21s
+command-parser-55d4dccb84-m7vcm   0/1     Running       0          16s
+command-parser-55d4dccb84-vv2pd   1/1     Running       0          82s
+--- 2026-11-08T23:35:06Z
+NAME                              READY   STATUS        RESTARTS   AGE
+command-parser-55d4dccb84-7sdkz   1/1     Terminating   0          2m28s
+command-parser-55d4dccb84-m7vcm   0/1     Running       0          23s
+command-parser-55d4dccb84-vv2pd   1/1     Running       0          89s
+--- 2026-11-08T23:35:12Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   0/1     Running   0          28s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          94s
+--- 2026-11-08T23:35:17Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   0/1     Running   0          34s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          100s
+--- 2026-11-08T23:35:26Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          42s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          108s
+--- 2026-11-08T23:35:31Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          47s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          113s
+--- 2026-11-08T23:35:37Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          53s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          119s
+--- 2026-11-08T23:35:42Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          58s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m4s
+--- 2026-11-08T23:35:48Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          67s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m13s
+--- 2026-11-08T23:35:57Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          75s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m21s
+--- 2026-11-08T23:36:04Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          80s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m26s
+--- 2026-11-08T23:36:09Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          86s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m32s
+--- 2026-11-08T23:36:15Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          91s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m37s
+--- 2026-11-08T23:36:20Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          96s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m42s
+--- 2026-11-08T23:36:25Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          101s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m47s
+--- 2026-11-08T23:36:30Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          107s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m53s
+--- 2026-11-08T23:36:36Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          112s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m58s
+--- 2026-11-08T23:36:41Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          118s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          3m4s
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /parse                                                                           351     0(0.00%) |   2028     565    7363   2100 |    1.96        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                       351     0(0.00%) |   2028     565    7363   2100 |    1.96        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+POST     /parse                                                                               2100   2300   2400   2700   4000   4600   6100   6500   7400   7400   7400    351
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           2100   2300   2400   2700   4000   4600   6100   6500   7400   7400   7400    351
+
+
+Successful requests by header:
+{
+  "per_replica": {
+    "command-parser-55d4dccb84-7sdkz": 26,
+    "command-parser-55d4dccb84-vv2pd": 195,
+    "command-parser-55d4dccb84-m7vcm": 130
+  },
+  "per_model_version": {
+    "v1": 351
+  }
+}
+[23:37:14] $ /home/student/cs3081-kd-command-parser/.venv/bin/python scripts/cost.py
+/home/student/cs3081-kd-command-parser/scripts/run_all.py:66: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  f.write(f"# {datetime.utcnow().isoformat()}Z  $ {cmd if shell else ' '.join(cmd)}  (exit {rc})\n{text}")
+{
+  "requests": 320,
+  "failures": 0,
+  "error_rate_percent": 0.0,
+  "p50_ms": 2000.0,
+  "p95_ms": 2400.0,
+  "requests_per_second": 2.687700887365216,
+  "hourly_cost_per_replica": 3.95,
+  "hourly_cost_all_replicas": 7.9,
+  "requests_per_hour": 9675.723194514778,
+  "currency": "INR",
+  "cost_per_1000_requests": 0.8165,
+  "slo": ">= 99.0% of requests return HTTP 200 within 30 s over one 2-minute load-test run",
+  "error_budget_requests": 3.2,
+  "budget_used_requests": 0,
+  "budget_used_percent": 0.0
+}
+[23:37:14] evidence collected; open results/summary.json to see parsed values
+[23:37:14] stage evidence done in 2303s
+[23:37:14] === STAGE ci ===
+[23:37:14] $ git add -A

@@ -21,6 +21,7 @@ KEYS = _SCHEMA["keys"]
 INTENTS = set(_SCHEMA["intents"])
 
 STATE = {"ready": False, "model": None, "tokenizer": None, "error": None}
+GEN_LOCK = threading.Semaphore(1)  # one generation at a time per pod keeps the 1-CPU pod from being throttled, so health probes stay responsive
 
 
 def download_model(model_uri, endpoint, dest):
@@ -115,7 +116,8 @@ def parse(body: dict):
         return JSONResponse({"error": "text must be a string"}, status_code=422)
     if not STATE["ready"]:
         return JSONResponse({"status": "loading"}, status_code=503)
-    raw = generate(text)
+    with GEN_LOCK:
+        raw = generate(text)
     if os.environ.get("FAULT_INJECT") == "1":
         raw = "not json"
     obj = validate_output(raw)

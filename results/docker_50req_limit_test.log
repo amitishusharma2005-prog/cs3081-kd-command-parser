@@ -1,4 +1,4 @@
-# 2026-11-08T21:29:49Z docker run --cpus=1.0 --memory=1g command-parser:local
+# 2026-11-08T22:58:56Z docker run --cpus=1.0 --memory=1g command-parser:local
 healthz 000 readyz 000
 healthz 200 readyz 503
 healthz 200 readyz 503
@@ -10,65 +10,59 @@ healthz 200 readyz 503
 healthz 200 readyz 503
 healthz 200 readyz 503
 healthz 200 readyz 503
-healthz 200 readyz 503
-healthz 200 readyz 503
-healthz 200 readyz 503
-healthz 200 readyz 503
-healthz 200 readyz 503
-healthz 200 readyz 503
 healthz 200 readyz 200
-request 1 -> HTTP 200, mem 670.2MiB
-request 2 -> HTTP 200, mem 672.3MiB
-request 3 -> HTTP 200, mem 672.8MiB
-request 4 -> HTTP 200, mem 672.8MiB
-request 5 -> HTTP 200, mem 672.8MiB
-request 6 -> HTTP 200, mem 672.8MiB
-request 7 -> HTTP 200, mem 672.6MiB
-request 8 -> HTTP 200, mem 672.8MiB
-request 9 -> HTTP 200, mem 672.6MiB
-request 10 -> HTTP 200, mem 672.4MiB
-request 11 -> HTTP 200, mem 672.9MiB
-request 12 -> HTTP 200, mem 672.9MiB
-request 13 -> HTTP 200, mem 672.9MiB
-request 14 -> HTTP 200, mem 673.1MiB
-request 15 -> HTTP 200, mem 672.7MiB
-request 16 -> HTTP 200, mem 672.7MiB
-request 17 -> HTTP 200, mem 672.7MiB
-request 18 -> HTTP 200, mem 672.9MiB
-request 19 -> HTTP 200, mem 672.7MiB
-request 20 -> HTTP 200, mem 672.7MiB
-request 21 -> HTTP 200, mem 672.2MiB
-request 22 -> HTTP 200, mem 673MiB
-request 23 -> HTTP 200, mem 672.3MiB
-request 24 -> HTTP 200, mem 673.3MiB
-request 25 -> HTTP 200, mem 672.8MiB
-request 26 -> HTTP 200, mem 672.3MiB
-request 27 -> HTTP 200, mem 672.6MiB
-request 28 -> HTTP 200, mem 672.6MiB
-request 29 -> HTTP 200, mem 672.8MiB
-request 30 -> HTTP 200, mem 673.3MiB
-request 31 -> HTTP 200, mem 673.1MiB
-request 32 -> HTTP 200, mem 672.9MiB
-request 33 -> HTTP 200, mem 673.4MiB
-request 34 -> HTTP 200, mem 673.1MiB
-request 35 -> HTTP 200, mem 672.9MiB
-request 36 -> HTTP 200, mem 672.7MiB
-request 37 -> HTTP 200, mem 673.7MiB
-request 38 -> HTTP 200, mem 672.9MiB
-request 39 -> HTTP 200, mem 673.4MiB
-request 40 -> HTTP 200, mem 673.2MiB
-request 41 -> HTTP 200, mem 673.2MiB
-request 42 -> HTTP 200, mem 673.2MiB
-request 43 -> HTTP 200, mem 673MiB
-request 44 -> HTTP 200, mem 672.8MiB
-request 45 -> HTTP 200, mem 673.5MiB
-request 46 -> HTTP 200, mem 673MiB
-request 47 -> HTTP 200, mem 672.8MiB
-request 48 -> HTTP 200, mem 673MiB
-request 49 -> HTTP 200, mem 672.8MiB
-request 50 -> HTTP 200, mem 673.3MiB
+request 1 -> HTTP 200, mem 477.3MiB
+request 2 -> HTTP 200, mem 479.6MiB
+request 3 -> HTTP 200, mem 478.8MiB
+request 4 -> HTTP 200, mem 479.2MiB
+request 5 -> HTTP 200, mem 478.9MiB
+request 6 -> HTTP 200, mem 479.2MiB
+request 7 -> HTTP 200, mem 479.2MiB
+request 8 -> HTTP 200, mem 479MiB
+request 9 -> HTTP 200, mem 479MiB
+request 10 -> HTTP 200, mem 479.2MiB
+request 11 -> HTTP 200, mem 479.2MiB
+request 12 -> HTTP 200, mem 479.5MiB
+request 13 -> HTTP 200, mem 479.5MiB
+request 14 -> HTTP 200, mem 479.5MiB
+request 15 -> HTTP 200, mem 479.3MiB
+request 16 -> HTTP 200, mem 479.8MiB
+request 17 -> HTTP 200, mem 479.7MiB
+request 18 -> HTTP 200, mem 479.7MiB
+request 19 -> HTTP 200, mem 479.3MiB
+request 20 -> HTTP 200, mem 479.6MiB
+request 21 -> HTTP 200, mem 479.6MiB
+request 22 -> HTTP 200, mem 479.9MiB
+request 23 -> HTTP 200, mem 479.6MiB
+request 24 -> HTTP 200, mem 479.9MiB
+request 25 -> HTTP 200, mem 479.4MiB
+request 26 -> HTTP 200, mem 479.7MiB
+request 27 -> HTTP 200, mem 479.4MiB
+request 28 -> HTTP 200, mem 479.5MiB
+request 29 -> HTTP 200, mem 479.2MiB
+request 30 -> HTTP 200, mem 480MiB
+request 31 -> HTTP 200, mem 479.2MiB
+request 32 -> HTTP 200, mem 479.5MiB
+request 33 -> HTTP 200, mem 479.5MiB
+request 34 -> HTTP 200, mem 480.4MiB
+request 35 -> HTTP 200, mem 478.8MiB
+request 36 -> HTTP 200, mem 479.3MiB
+request 37 -> HTTP 200, mem 479.1MiB
+request 38 -> HTTP 200, mem 478.8MiB
+request 39 -> HTTP 200, mem 478.6MiB
+request 40 -> HTTP 200, mem 479.4MiB
+request 41 -> HTTP 200, mem 478.9MiB
+request 42 -> HTTP 200, mem 478.6MiB
+request 43 -> HTTP 200, mem 479.6MiB
+request 44 -> HTTP 200, mem 479.4MiB
+request 45 -> HTTP 200, mem 479.2MiB
+request 46 -> HTTP 200, mem 479.4MiB
+request 47 -> HTTP 200, mem 479.2MiB
+request 48 -> HTTP 200, mem 478.9MiB
+request 49 -> HTTP 200, mem 479MiB
+request 50 -> HTTP 200, mem 479MiB
 ok=50/50
-CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT   MEM %     NET I/O         BLOCK I/O       PIDS
-2aabf11b927c   cp-limit   0.16%     673.1MiB / 1GiB     65.73%    286MB / 623kB   693MB / 287MB   14
+CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT   MEM %     NET I/O          BLOCK I/O       PIDS
+e27f95e942e7   cp-limit   0.15%     478.7MiB / 1GiB     46.75%    287MB / 1.09MB   354MB / 287MB   14
 OOMKilled: false
-peak memory (cgroup): 923648000
+peak memory (cgroup): 1038163968

@@ -1,115 +1,114 @@
-# 2026-11-08T22:11:16Z pod recovery under load
+# 2026-11-08T23:34:12Z pod recovery under load
 deployment.apps/command-parser scaled
 deployment "command-parser" successfully rolled out
-deleting pod/command-parser-66d6994cd5-82725
-pod "command-parser-66d6994cd5-82725" deleted from app namespace
---- 2026-11-08T22:11:49Z
+deleting pod/command-parser-55d4dccb84-7sdkz
+pod "command-parser-55d4dccb84-7sdkz" deleted from app namespace
+--- 2026-11-08T23:34:44Z
 NAME                              READY   STATUS              RESTARTS   AGE
-command-parser-66d6994cd5-82725   1/1     Terminating         0          2m33s
-command-parser-66d6994cd5-dwjbv   0/1     ContainerCreating   0          2s
-command-parser-66d6994cd5-xrpv2   1/1     Running             0          79s
---- 2026-11-08T22:11:56Z
+command-parser-55d4dccb84-7sdkz   1/1     Terminating         0          2m6s
+command-parser-55d4dccb84-m7vcm   0/1     ContainerCreating   0          1s
+command-parser-55d4dccb84-vv2pd   1/1     Running             0          67s
+--- 2026-11-08T23:34:52Z
 NAME                              READY   STATUS        RESTARTS   AGE
-command-parser-66d6994cd5-82725   1/1     Terminating   0          2m39s
-command-parser-66d6994cd5-dwjbv   0/1     Running       0          8s
-command-parser-66d6994cd5-xrpv2   1/1     Running       0          85s
---- 2026-11-08T22:12:02Z
+command-parser-55d4dccb84-7sdkz   1/1     Terminating   0          2m14s
+command-parser-55d4dccb84-m7vcm   0/1     Running       0          9s
+command-parser-55d4dccb84-vv2pd   1/1     Running       0          75s
+--- 2026-11-08T23:34:58Z
 NAME                              READY   STATUS        RESTARTS   AGE
-command-parser-66d6994cd5-82725   1/1     Terminating   0          2m45s
-command-parser-66d6994cd5-dwjbv   0/1     Running       0          14s
-command-parser-66d6994cd5-xrpv2   1/1     Running       0          91s
---- 2026-11-08T22:12:26Z
+command-parser-55d4dccb84-7sdkz   1/1     Terminating   0          2m21s
+command-parser-55d4dccb84-m7vcm   0/1     Running       0          16s
+command-parser-55d4dccb84-vv2pd   1/1     Running       0          82s
+--- 2026-11-08T23:35:06Z
 NAME                              READY   STATUS        RESTARTS   AGE
-command-parser-66d6994cd5-82725   0/1     Terminating   0          3m10s
-command-parser-66d6994cd5-dwjbv   0/1     Running       0          39s
-command-parser-66d6994cd5-xrpv2   1/1     Running       0          116s
---- 2026-11-08T22:12:36Z
-NAME                              READY   STATUS        RESTARTS   AGE
-command-parser-66d6994cd5-82725   0/1     Terminating   0          3m21s
-command-parser-66d6994cd5-dwjbv   0/1     Running       0          50s
-command-parser-66d6994cd5-xrpv2   1/1     Running       0          2m7s
---- 2026-11-08T22:12:44Z
+command-parser-55d4dccb84-7sdkz   1/1     Terminating   0          2m28s
+command-parser-55d4dccb84-m7vcm   0/1     Running       0          23s
+command-parser-55d4dccb84-vv2pd   1/1     Running       0          89s
+--- 2026-11-08T23:35:12Z
 NAME                              READY   STATUS    RESTARTS   AGE
-command-parser-66d6994cd5-dwjbv   0/1     Running   0          56s
-command-parser-66d6994cd5-xrpv2   1/1     Running   0          2m13s
---- 2026-11-08T22:12:50Z
+command-parser-55d4dccb84-m7vcm   0/1     Running   0          28s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          94s
+--- 2026-11-08T23:35:17Z
 NAME                              READY   STATUS    RESTARTS   AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0          62s
-command-parser-66d6994cd5-xrpv2   1/1     Running   0          2m19s
---- 2026-11-08T22:12:56Z
+command-parser-55d4dccb84-m7vcm   0/1     Running   0          34s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          100s
+--- 2026-11-08T23:35:26Z
 NAME                              READY   STATUS    RESTARTS   AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0          69s
-command-parser-66d6994cd5-xrpv2   0/1     Running   0          2m26s
---- 2026-11-08T22:13:04Z
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          42s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          108s
+--- 2026-11-08T23:35:31Z
 NAME                              READY   STATUS    RESTARTS   AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0          76s
-command-parser-66d6994cd5-xrpv2   0/1     Running   0          2m33s
---- 2026-11-08T22:13:10Z
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          47s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          113s
+--- 2026-11-08T23:35:37Z
 NAME                              READY   STATUS    RESTARTS   AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0          82s
-command-parser-66d6994cd5-xrpv2   0/1     Running   0          2m39s
---- 2026-11-08T22:13:16Z
-NAME                              READY   STATUS    RESTARTS     AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0            88s
-command-parser-66d6994cd5-xrpv2   0/1     Running   1 (7s ago)   2m45s
---- 2026-11-08T22:13:22Z
-NAME                              READY   STATUS    RESTARTS      AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0             95s
-command-parser-66d6994cd5-xrpv2   0/1     Running   1 (14s ago)   2m52s
---- 2026-11-08T22:13:29Z
-NAME                              READY   STATUS    RESTARTS      AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0             102s
-command-parser-66d6994cd5-xrpv2   0/1     Running   1 (21s ago)   2m59s
---- 2026-11-08T22:13:36Z
-NAME                              READY   STATUS    RESTARTS      AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0             108s
-command-parser-66d6994cd5-xrpv2   1/1     Running   1 (27s ago)   3m5s
---- 2026-11-08T22:13:42Z
-NAME                              READY   STATUS    RESTARTS      AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0             114s
-command-parser-66d6994cd5-xrpv2   1/1     Running   1 (33s ago)   3m11s
---- 2026-11-08T22:13:48Z
-NAME                              READY   STATUS    RESTARTS      AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0             2m1s
-command-parser-66d6994cd5-xrpv2   1/1     Running   1 (40s ago)   3m18s
---- 2026-11-08T22:13:55Z
-NAME                              READY   STATUS    RESTARTS      AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0             2m7s
-command-parser-66d6994cd5-xrpv2   1/1     Running   1 (46s ago)   3m24s
---- 2026-11-08T22:14:01Z
-NAME                              READY   STATUS    RESTARTS      AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0             2m13s
-command-parser-66d6994cd5-xrpv2   1/1     Running   1 (52s ago)   3m30s
---- 2026-11-08T22:14:07Z
-NAME                              READY   STATUS    RESTARTS      AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0             2m19s
-command-parser-66d6994cd5-xrpv2   1/1     Running   1 (58s ago)   3m36s
---- 2026-11-08T22:14:13Z
-NAME                              READY   STATUS    RESTARTS      AGE
-command-parser-66d6994cd5-dwjbv   1/1     Running   0             2m25s
-command-parser-66d6994cd5-xrpv2   1/1     Running   1 (64s ago)   3m42s
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          53s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          119s
+--- 2026-11-08T23:35:42Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          58s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m4s
+--- 2026-11-08T23:35:48Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          67s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m13s
+--- 2026-11-08T23:35:57Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          75s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m21s
+--- 2026-11-08T23:36:04Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          80s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m26s
+--- 2026-11-08T23:36:09Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          86s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m32s
+--- 2026-11-08T23:36:15Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          91s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m37s
+--- 2026-11-08T23:36:20Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          96s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m42s
+--- 2026-11-08T23:36:25Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          101s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m47s
+--- 2026-11-08T23:36:30Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          107s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m53s
+--- 2026-11-08T23:36:36Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          112s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          2m58s
+--- 2026-11-08T23:36:41Z
+NAME                              READY   STATUS    RESTARTS   AGE
+command-parser-55d4dccb84-m7vcm   1/1     Running   0          118s
+command-parser-55d4dccb84-vv2pd   1/1     Running   0          3m4s
+Type     Name                                                                          # reqs      # fails |    Avg     Min     Max    Med |   req/s  failures/s
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+POST     /parse                                                                           351     0(0.00%) |   2028     565    7363   2100 |    1.96        0.00
+--------|----------------------------------------------------------------------------|-------|-------------|-------|-------|-------|-------|--------|-----------
+         Aggregated                                                                       351     0(0.00%) |   2028     565    7363   2100 |    1.96        0.00
+
 Response time percentiles (approximated)
 Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
 --------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
-POST     /parse                                                                               4800  11000  30000  30000  30000  36000  37000  37000  37000  37000  37000     61
+POST     /parse                                                                               2100   2300   2400   2700   4000   4600   6100   6500   7400   7400   7400    351
 --------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
-         Aggregated                                                                           4800  11000  30000  30000  30000  36000  37000  37000  37000  37000  37000     61
-
-Error report
-# occurrences      Error                                                                                               
-------------------|---------------------------------------------------------------------------------------------------------------------------------------------
-16                 POST /parse: HTTP 0                                                                                 
-4                  POST /parse: HTTP 502                                                                               
-------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+         Aggregated                                                                           2100   2300   2400   2700   4000   4600   6100   6500   7400   7400   7400    351
 
 
 Successful requests by header:
 {
   "per_replica": {
-    "command-parser-66d6994cd5-dwjbv": 24,
-    "command-parser-66d6994cd5-xrpv2": 17
+    "command-parser-55d4dccb84-7sdkz": 26,
+    "command-parser-55d4dccb84-vv2pd": 195,
+    "command-parser-55d4dccb84-m7vcm": 130
   },
   "per_model_version": {
-    "v1": 41
+    "v1": 351
   }
 }

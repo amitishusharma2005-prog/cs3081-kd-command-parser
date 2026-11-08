@@ -67,7 +67,7 @@ rollout() {
     sleep 30; echo "# $(ts) rollback"; kubectl -n app rollout undo deploy/command-parser
     kubectl -n app rollout status deploy/command-parser; wait
     kubectl -n app rollout history deploy/command-parser
-    curl -si -X POST $HOST/parse -H 'content-type: application/json' -d '{"text":"what is the weather in london"}' | grep -i -E 'HTTP/|x-model-version|x-served-by'
+    for try in $(seq 1 12); do echo "check $try after rollback ($(ts))"; curl -si -m 30 -X POST $HOST/parse -H 'content-type: application/json' -d '{"text":"what is the weather in london"}' | grep -i -E 'HTTP/|x-model-version|x-served-by' | tee /tmp/rb.txt; grep -qi 'x-model-version: v1' /tmp/rb.txt && break; sleep 5; done
     tail -n 25 results/rollout_console.log; cat results/rollout_headers.json; } 2>&1 | tee results/rolling_update_rollback.log
 }
 

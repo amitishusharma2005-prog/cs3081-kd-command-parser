@@ -51,46 +51,46 @@
     }
   },
   "loadtest": {
-    "requests": 30893,
-    "failures": 30830,
-    "failure_percent": 99.796,
-    "p50_ms": 3.0,
-    "p95_ms": 6.0,
-    "rps": 261.496823823248
+    "requests": 320,
+    "failures": 0,
+    "failure_percent": 0.0,
+    "p50_ms": 2000.0,
+    "p95_ms": 2400.0,
+    "rps": 2.687700887365216
   },
   "headers": {
     "per_replica": {
-      "command-parser-66d6994cd5-g4mbn": 132,
-      "command-parser-66d6994cd5-j569n": 131
+      "command-parser-55d4dccb84-p4ngr": 447,
+      "command-parser-55d4dccb84-6wj94": 397
     },
     "per_model_version": {
-      "v1": 263
+      "v1": 844
     }
   },
   "replica_share_percent": {
-    "command-parser-66d6994cd5-g4mbn": 50.19,
-    "command-parser-66d6994cd5-j569n": 49.81
+    "command-parser-55d4dccb84-p4ngr": 52.96,
+    "command-parser-55d4dccb84-6wj94": 47.04
   },
   "rollout": {
-    "requests": 116,
-    "failures": 17,
-    "failure_percent": 14.655,
-    "p50_ms": 2500.0,
-    "p95_ms": 30000.0,
-    "rps": 0.5323707586264477
+    "requests": 279,
+    "failures": 6,
+    "failure_percent": 2.151,
+    "p50_ms": 1800.0,
+    "p95_ms": 13000.0,
+    "rps": 1.169222973417226
   },
   "rollout_versions_seen": {
-    "v1": 55,
-    "v2": 44
+    "v1": 129,
+    "v2": 146
   },
-  "version_after_rollback": "v2",
+  "version_after_rollback": "v1",
   "recovery_load": {
-    "requests": 61,
-    "failures": 20,
-    "failure_percent": 32.787,
-    "p50_ms": 4800.0,
-    "p95_ms": 36000.0,
-    "rps": 0.34299458339116434
+    "requests": 351,
+    "failures": 0,
+    "failure_percent": 0.0,
+    "p50_ms": 2100.0,
+    "p95_ms": 4600.0,
+    "rps": 1.9637416918890038
   },
   "recovery_pods": {
     "running_ready_pods_at_end": 2
@@ -110,47 +110,47 @@
   },
   "coldstart": {
     "per_run_seconds": {
-      "1": 81,
-      "2": 51,
-      "3": 80
+      "1": 23,
+      "2": 59,
+      "3": 58
     },
-    "median_seconds": 80,
+    "median_seconds": 58,
     "definition": "per run = slowest new Pod, creationTimestamp -> Ready; median over runs"
   },
   "docker50": {
     "ok": 50,
     "oom_killed": "false",
-    "peak_mib_cgroup": 880.9,
-    "peak_mib_docker_stats": 673.7
+    "peak_mib_cgroup": 990.1,
+    "peak_mib_docker_stats": 480.4
   },
   "top": [
     {
-      "pod": "command-parser-66d6994cd5-j569n",
-      "cpu": "412m",
-      "memory": "488Mi"
+      "pod": "command-parser-55d4dccb84-p4ngr",
+      "cpu": "1000m",
+      "memory": "521Mi"
     },
     {
-      "pod": "command-parser-66d6994cd5-vz54w",
-      "cpu": "497m",
-      "memory": "476Mi"
+      "pod": "command-parser-55d4dccb84-ttgfp",
+      "cpu": "998m",
+      "memory": "469Mi"
     }
   ],
   "cost": {
-    "requests": 30893,
-    "failures": 30830,
-    "error_rate_percent": 99.7961,
-    "p50_ms": 3.0,
-    "p95_ms": 6.0,
-    "requests_per_second": 261.496823823248,
+    "requests": 320,
+    "failures": 0,
+    "error_rate_percent": 0.0,
+    "p50_ms": 2000.0,
+    "p95_ms": 2400.0,
+    "requests_per_second": 2.687700887365216,
     "hourly_cost_per_replica": 3.95,
     "hourly_cost_all_replicas": 7.9,
-    "requests_per_hour": 941388.5657636928,
+    "requests_per_hour": 9675.723194514778,
     "currency": "INR",
-    "cost_per_1000_requests": 0.0084,
+    "cost_per_1000_requests": 0.8165,
     "slo": ">= 99.0% of requests return HTTP 200 within 30 s over one 2-minute load-test run",
-    "error_budget_requests": 308.93,
-    "budget_used_requests": 30830,
-    "budget_used_percent": 9979.61
+    "error_budget_requests": 3.2,
+    "budget_used_requests": 0,
+    "budget_used_percent": 0.0
   },
   "image_size_mb": 1615.7,
   "gitleaks_clean": true,
