@@ -13171,3 +13171,23 @@ Successful requests by header:
 [23:37:14] stage evidence done in 2303s
 [23:37:14] === STAGE ci ===
 [23:37:14] $ git add -A
+[23:37:14] $ git commit -m Evidence from deployment tests
+[main b8ef207] Evidence from deployment tests
+ 39 files changed, 4581 insertions(+), 2693 deletions(-)
+[23:37:14] $ git push -u origin main
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+   b67b592..b8ef207  main -> main
+branch 'main' set up to track 'origin/main'.
+[23:37:18] $ git tag -f final && git push -f origin final
+Updated tag 'final' (was b67b592)
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+ + b67b592...b8ef207 final -> final (forced update)
+[23:37:22] $ gh workflow run ci.yml -R amitishusharma2005-prog/cs3081-kd-command-parser -f candidate=untrained
+https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42536055043
+[23:37:46] untrained run https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42536055043: {'lint': 'failure', 'secret-scan': 'success', 'unit-tests': 'skipped', 'model-evaluation': 'skipped', 'quality-gate': 'skipped'}
+[23:37:46] STAGE_FAILED ci: expected the quality gate to FAIL for the untrained model, got {'lint': 'failure', 'secret-scan': 'success', 'unit-tests': 'skipped', 'model-evaluation': 'skipped', 'quality-gate': 'skipped'}
+
+Stage 'ci' stopped. Fix the cause and run again; finished stages are skipped.
+[23:37:47] job: run stopped (attempt 1/3); retrying in 60 s
+[23:38:47] === STAGE ci ===
+[23:38:47] $ git add -A
