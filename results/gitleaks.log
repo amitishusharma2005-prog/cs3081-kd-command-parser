@@ -1,22 +1,5 @@
-# 2026-11-08T22:20:47.905493Z  $ docker run --rm -v "$PWD":/repo zricethezav/gitleaks:v8.21.2 detect --source /repo --no-banner --redact  (exit 0)
-Unable to find image 'zricethezav/gitleaks:v8.21.2' locally
-v8.21.2: Pulling from zricethezav/gitleaks
-94c7366c1c30: Pulling fs layer
-3e97f466b634: Pulling fs layer
-4874c05f69ad: Pulling fs layer
-43aa3c0c54b2: Pulling fs layer
-43aa3c0c54b2: Download complete
-94c7366c1c30: Download complete
-3e97f466b634: Download complete
-4874c05f69ad: Download complete
-94c7366c1c30: Pull complete
-03242aded468: Download complete
-3e97f466b634: Pull complete
-43aa3c0c54b2: Pull complete
-4874c05f69ad: Pull complete
-Digest: sha256:0e99e8821643ea5b235718642b93bb32486af9c8162c8b8731f7cbdc951a7f46
-Status: Downloaded newer image for zricethezav/gitleaks:v8.21.2
-[90m10:20PM[0m [32mINF[0m 3 commits scanned.
-[90m10:20PM[0m [32mINF[0m scan completed in 714ms
-[90m10:20PM[0m [32mINF[0m no leaks found
+# 2026-11-08T23:54:49.178187Z  $ docker run --rm -v "$PWD":/repo zricethezav/gitleaks:v8.21.2 detect --source /repo --no-banner --redact  (exit 0)
+[90m11:54PM[0m [32mINF[0m 9 commits scanned.
+[90m11:54PM[0m [32mINF[0m scan completed in 748ms
+[90m11:54PM[0m [32mINF[0m no leaks found
 exit=0
