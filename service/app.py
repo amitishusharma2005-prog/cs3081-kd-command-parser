@@ -52,6 +52,9 @@ def load_model():
     download_model(os.environ["MODEL_URI"], os.environ["S3_ENDPOINT"], dest)
     STATE["tokenizer"] = AutoTokenizer.from_pretrained(dest)
     STATE["model"] = AutoModelForCausalLM.from_pretrained(dest).eval()
+    for _w in ("what is the weather in london", "set an alarm for seven am tomorrow"):
+        generate(_w)  # warm-up: the first generations are slow on a 1-CPU pod; do them before reporting ready
+    print("warm-up done", flush=True)
     STATE["ready"] = True
     print("model ready", flush=True)
 

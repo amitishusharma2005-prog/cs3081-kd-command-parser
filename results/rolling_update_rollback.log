@@ -1,7 +1,5 @@
-# 2026-11-08T23:29:18Z rolling update v1 -> v2 under load
+# 2026-11-09T00:54:45Z rolling update v1 -> v2 under load
 deployment.apps/command-parser scaled
-Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
-Waiting for deployment "command-parser" rollout to finish: 1 of 2 updated replicas are available...
 deployment "command-parser" successfully rolled out
 deployment.apps/command-parser env updated
 Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
@@ -12,10 +10,11 @@ Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pe
 Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
 Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
 deployment "command-parser" successfully rolled out
-# 2026-11-08T23:32:38Z rollback
+# 2026-11-09T00:57:00Z rollback
 Warning: resource deployments/command-parser was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
 deployment.apps/command-parser rolled back
 Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
 Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
 Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
 Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
@@ -29,47 +28,53 @@ REVISION  CHANGE-CAUSE
 4         <none>
 5         <none>
 7         <none>
-9         <none>
-10        <none>
+11        <none>
+12        <none>
+14        <none>
+15        <none>
+17        <none>
+18        <none>
 
-check 1 after rollback (2026-11-08T23:33:57Z)
+check 1 after rollback (2026-11-09T00:58:49Z)
 HTTP/1.1 200 OK
 X-Model-Version: v1
-X-Served-By: command-parser-55d4dccb84-7sdkz
-POST     /parse                                                                               1800   2300   2600   2900   7200  13000  21000  31000  45000  45000  45000    281
---------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
-         Aggregated                                                                           1800   2300   2600   2900   7200  13000  21000  31000  45000  45000  45000    281
+X-Served-By: command-parser-6c64f95568-dfpm7
+         Aggregated                                                                       471     0(0.00%) |   2026     440   15028   1900 |    1.96        0.00
 
-Error report
-# occurrences      Error                                                                                               
-------------------|---------------------------------------------------------------------------------------------------------------------------------------------
-5                  POST /parse: HTTP 0                                                                                 
-1                  POST /parse: HTTP 502                                                                               
-------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+POST     /parse                                                                               1900   2200   2400   2500   3500   5100   6700   8600  15000  15000  15000    471
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           1900   2200   2400   2500   3500   5100   6700   8600  15000  15000  15000    471
 
 
 Successful requests by header:
 {
   "per_replica": {
-    "command-parser-55d4dccb84-kfszn": 58,
-    "command-parser-55d4dccb84-6wj94": 71,
-    "command-parser-568fc864b-mkrk7": 76,
-    "command-parser-568fc864b-qvhvz": 70
+    "command-parser-6c64f95568-tv57f": 107,
+    "command-parser-6c64f95568-jv57c": 71,
+    "command-parser-6d9c46dcdb-f8zrn": 96,
+    "command-parser-6d9c46dcdb-4p6xb": 89,
+    "command-parser-6c64f95568-wfpnb": 67,
+    "command-parser-6c64f95568-dfpm7": 41
   },
   "per_model_version": {
-    "v1": 129,
-    "v2": 146
+    "v1": 286,
+    "v2": 185
   }
 }
 {
   "per_replica": {
-    "command-parser-55d4dccb84-kfszn": 58,
-    "command-parser-55d4dccb84-6wj94": 71,
-    "command-parser-568fc864b-mkrk7": 76,
-    "command-parser-568fc864b-qvhvz": 70
+    "command-parser-6c64f95568-tv57f": 107,
+    "command-parser-6c64f95568-jv57c": 71,
+    "command-parser-6d9c46dcdb-f8zrn": 96,
+    "command-parser-6d9c46dcdb-4p6xb": 89,
+    "command-parser-6c64f95568-wfpnb": 67,
+    "command-parser-6c64f95568-dfpm7": 41
   },
   "per_model_version": {
-    "v1": 129,
-    "v2": 146
+    "v1": 286,
+    "v2": 185
   }
 }

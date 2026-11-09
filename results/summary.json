@@ -60,28 +60,28 @@
   },
   "headers": {
     "per_replica": {
-      "command-parser-55d4dccb84-p4ngr": 447,
-      "command-parser-55d4dccb84-6wj94": 397
+      "command-parser-55d4dccb84-vv2pd": 481,
+      "command-parser-55d4dccb84-kv26z": 371
     },
     "per_model_version": {
-      "v1": 844
+      "v1": 852
     }
   },
   "replica_share_percent": {
-    "command-parser-55d4dccb84-p4ngr": 52.96,
-    "command-parser-55d4dccb84-6wj94": 47.04
+    "command-parser-55d4dccb84-vv2pd": 56.46,
+    "command-parser-55d4dccb84-kv26z": 43.54
   },
   "rollout": {
-    "requests": 279,
-    "failures": 6,
-    "failure_percent": 2.151,
-    "p50_ms": 1800.0,
-    "p95_ms": 13000.0,
-    "rps": 1.169222973417226
+    "requests": 469,
+    "failures": 0,
+    "failure_percent": 0.0,
+    "p50_ms": 1900.0,
+    "p95_ms": 5100.0,
+    "rps": 1.965678648184169
   },
   "rollout_versions_seen": {
-    "v1": 129,
-    "v2": 146
+    "v1": 286,
+    "v2": 185
   },
   "version_after_rollback": "v1",
   "recovery_load": {
@@ -102,19 +102,19 @@
   },
   "hpa": {
     "observations": 101,
-    "start_replicas": 2,
+    "start_replicas": 1,
     "max_replicas_seen": 2,
     "final_replicas": 1,
-    "scaled_up_1_to_2": false,
+    "scaled_up_1_to_2": true,
     "scaled_back_to_1": true
   },
   "coldstart": {
     "per_run_seconds": {
-      "1": 23,
-      "2": 59,
-      "3": 58
+      "1": 68,
+      "2": 69,
+      "3": 62
     },
-    "median_seconds": 58,
+    "median_seconds": 68,
     "definition": "per run = slowest new Pod, creationTimestamp -> Ready; median over runs"
   },
   "docker50": {

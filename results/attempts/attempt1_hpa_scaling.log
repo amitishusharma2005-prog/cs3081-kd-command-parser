@@ -1,0 +1,673 @@
+# 2026-11-08T23:08:58Z HPA scaling test
+NAME                 REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          106m
+deployment.apps/command-parser scaled
+--- 2026-11-08T23:08:59Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          106m
+
+NAME                                  READY   STATUS        RESTARTS   AGE
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running       0          3m2s
+pod/command-parser-55d4dccb84-ttgfp   1/1     Terminating   0          3m2s
+--- 2026-11-08T23:09:09Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         1          106m
+
+NAME                                  READY   STATUS        RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   0/1     Running       0          2s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running       0          3m12s
+pod/command-parser-55d4dccb84-ttgfp   1/1     Terminating   0          3m12s
+--- 2026-11-08T23:09:19Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         1          106m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   0/1     Running   0          13s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          3m23s
+--- 2026-11-08T23:09:30Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 397%/70%   1         2         2          106m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          23s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          3m33s
+--- 2026-11-08T23:09:40Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 397%/70%   1         2         2          106m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          34s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          3m44s
+--- 2026-11-08T23:09:51Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 386%/70%   1         2         2          106m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          44s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          3m54s
+--- 2026-11-08T23:10:01Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 386%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          55s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m5s
+--- 2026-11-08T23:10:12Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          65s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m15s
+--- 2026-11-08T23:10:22Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          75s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m25s
+--- 2026-11-08T23:10:32Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          85s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m35s
+--- 2026-11-08T23:10:42Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          95s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m45s
+--- 2026-11-08T23:10:52Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 394%/70%   1         2         2          107m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          105s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          4m55s
+--- 2026-11-08T23:11:02Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 394%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          116s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m6s
+--- 2026-11-08T23:11:13Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m6s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m16s
+--- 2026-11-08T23:11:23Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m16s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m26s
+--- 2026-11-08T23:11:33Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m26s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m36s
+--- 2026-11-08T23:11:43Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 392%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m36s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m46s
+--- 2026-11-08T23:11:53Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          108m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m47s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          5m57s
+--- 2026-11-08T23:12:04Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          2m57s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m7s
+--- 2026-11-08T23:12:14Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 394%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m7s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m17s
+--- 2026-11-08T23:12:24Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 395%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m17s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m27s
+--- 2026-11-08T23:12:34Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 395%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m27s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m37s
+--- 2026-11-08T23:12:44Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 397%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m38s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m48s
+--- 2026-11-08T23:12:55Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 395%/70%   1         2         2          109m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m48s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          6m58s
+--- 2026-11-08T23:13:05Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 395%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          3m58s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m8s
+--- 2026-11-08T23:13:15Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 390%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m8s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m18s
+--- 2026-11-08T23:13:25Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m18s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m28s
+--- 2026-11-08T23:13:35Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m29s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m39s
+--- 2026-11-08T23:13:46Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 393%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m39s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m49s
+--- 2026-11-08T23:13:56Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 337%/70%   1         2         2          110m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m49s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          7m59s
+--- 2026-11-08T23:14:06Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 337%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          4m59s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m9s
+--- 2026-11-08T23:14:16Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 398%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m10s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m20s
+--- 2026-11-08T23:14:27Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 385%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m20s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m30s
+--- 2026-11-08T23:14:37Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m30s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m40s
+--- 2026-11-08T23:14:47Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          111m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m40s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          8m50s
+--- 2026-11-08T23:14:57Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 399%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          5m51s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m1s
+--- 2026-11-08T23:15:08Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 393%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m1s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m11s
+--- 2026-11-08T23:15:18Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 393%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m11s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m21s
+--- 2026-11-08T23:15:28Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 320%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m21s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m31s
+--- 2026-11-08T23:15:38Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 135%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m31s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m41s
+--- 2026-11-08T23:15:48Z
+NAME                                                     REFERENCE                   TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 135%/70%   1         2         2          112m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m41s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          9m51s
+--- 2026-11-08T23:15:58Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          6m51s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:08Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m1s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:18Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m11s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:28Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m21s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:38Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m31s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:48Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          113m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m41s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          10m
+--- 2026-11-08T23:16:59Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          7m52s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:09Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m2s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:19Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m12s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:29Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m22s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:39Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m32s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:49Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          114m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m42s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          11m
+--- 2026-11-08T23:17:59Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          8m52s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:09Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m2s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:19Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m12s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:29Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m22s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:39Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m33s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:18:50Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          115m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m43s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          12m
+--- 2026-11-08T23:19:00Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          9m53s
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+# load finished, waiting for scale-down
+--- 2026-11-08T23:19:10Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          10m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+--- 2026-11-08T23:19:25Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          10m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+--- 2026-11-08T23:19:40Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          10m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+--- 2026-11-08T23:19:55Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          116m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          10m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          13m
+--- 2026-11-08T23:20:10Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          117m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          11m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          14m
+--- 2026-11-08T23:20:25Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         2          117m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          11m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Running   0          14m
+--- 2026-11-08T23:20:40Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         2          117m
+
+NAME                                  READY   STATUS        RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running       0          11m
+pod/command-parser-55d4dccb84-p4ngr   1/1     Terminating   0          14m
+--- 2026-11-08T23:20:56Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          117m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          11m
+--- 2026-11-08T23:21:11Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          118m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          12m
+--- 2026-11-08T23:21:26Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          118m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          12m
+--- 2026-11-08T23:21:41Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          118m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          12m
+--- 2026-11-08T23:21:56Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          118m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          12m
+--- 2026-11-08T23:22:11Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          119m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          13m
+--- 2026-11-08T23:22:27Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          119m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          13m
+--- 2026-11-08T23:22:42Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          119m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          13m
+--- 2026-11-08T23:22:57Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          120m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          13m
+--- 2026-11-08T23:23:12Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          120m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          14m
+--- 2026-11-08T23:23:28Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          120m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          14m
+--- 2026-11-08T23:23:43Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          120m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          14m
+--- 2026-11-08T23:23:59Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          121m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          14m
+--- 2026-11-08T23:24:14Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          121m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          15m
+--- 2026-11-08T23:24:29Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          121m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          15m
+--- 2026-11-08T23:24:44Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          121m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          15m
+--- 2026-11-08T23:25:00Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          122m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          15m
+--- 2026-11-08T23:25:15Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          122m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          16m
+--- 2026-11-08T23:25:30Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          122m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          16m
+--- 2026-11-08T23:25:45Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          122m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          16m
+--- 2026-11-08T23:26:00Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          123m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          16m
+--- 2026-11-08T23:26:15Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          123m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          17m
+--- 2026-11-08T23:26:30Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          123m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          17m
+--- 2026-11-08T23:26:45Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          123m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          17m
+--- 2026-11-08T23:27:01Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          124m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          17m
+--- 2026-11-08T23:27:16Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          124m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          18m
+--- 2026-11-08T23:27:31Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 0%/70%   1         2         1          124m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          18m
+--- 2026-11-08T23:27:47Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          124m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          18m
+--- 2026-11-08T23:28:02Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          125m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          18m
+--- 2026-11-08T23:28:17Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          125m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          19m
+--- 2026-11-08T23:28:32Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          125m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          19m
+--- 2026-11-08T23:28:48Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          125m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          19m
+--- 2026-11-08T23:29:03Z
+NAME                                                     REFERENCE                   TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/command-parser-hpa   Deployment/command-parser   cpu: 1%/70%   1         2         1          126m
+
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/command-parser-55d4dccb84-6wj94   1/1     Running   0          19m

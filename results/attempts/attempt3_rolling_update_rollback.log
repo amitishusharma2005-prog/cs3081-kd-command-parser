@@ -1,0 +1,77 @@
+# 2026-11-09T00:44:02Z rolling update v1 -> v2 under load
+deployment.apps/command-parser scaled
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser env updated
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+# 2026-11-09T00:46:28Z rollback
+Warning: resource deployments/command-parser was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
+deployment.apps/command-parser rolled back
+Waiting for deployment spec update to be observed...
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser 
+REVISION  CHANGE-CAUSE
+2         <none>
+4         <none>
+5         <none>
+7         <none>
+11        <none>
+12        <none>
+14        <none>
+15        <none>
+
+check 1 after rollback (2026-11-09T00:48:04Z)
+HTTP/1.1 200 OK
+X-Model-Version: v1
+X-Served-By: command-parser-9677c4ff-xlqkn
+         Aggregated                                                                           1900   2400   2800   3300   4800   6800  19000  30000  30000  30000  30000    333
+
+Error report
+# occurrences      Error                                                                                               
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+4                  POST /parse: HTTP 0                                                                                 
+1                  POST /parse: HTTP 502                                                                               
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Successful requests by header:
+{
+  "per_replica": {
+    "command-parser-9677c4ff-2zmqq": 79,
+    "command-parser-9677c4ff-nfkqk": 57,
+    "command-parser-c6dc678c7-5s482": 86,
+    "command-parser-c6dc678c7-pdl5n": 43,
+    "command-parser-9677c4ff-xlqkn": 44,
+    "command-parser-9677c4ff-f42vx": 19
+  },
+  "per_model_version": {
+    "v1": 199,
+    "v2": 129
+  }
+}
+{
+  "per_replica": {
+    "command-parser-9677c4ff-2zmqq": 79,
+    "command-parser-9677c4ff-nfkqk": 57,
+    "command-parser-c6dc678c7-5s482": 86,
+    "command-parser-c6dc678c7-pdl5n": 43,
+    "command-parser-9677c4ff-xlqkn": 44,
+    "command-parser-9677c4ff-f42vx": 19
+  },
+  "per_model_version": {
+    "v1": 199,
+    "v2": 129
+  }
+}

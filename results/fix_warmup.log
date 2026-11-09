@@ -1,0 +1,354 @@
+service/app.py patched
+All checks passed!
+.................................                                        [100%]
+33 passed in 10.25s
+[00:51:55] build and import the image
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 545B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.11-slim
+#2 DONE 2.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 96B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 5.07kB done
+#4 DONE 0.0s
+
+#5 [1/6] FROM docker.io/library/python:3.11-slim@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535
+#5 resolve docker.io/library/python:3.11-slim@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535 0.0s done
+#5 DONE 0.0s
+
+#6 [2/6] WORKDIR /app
+#6 CACHED
+
+#7 [3/6] COPY service/requirements.txt .
+#7 CACHED
+
+#8 [4/6] RUN pip install -r requirements.txt
+#8 CACHED
+
+#9 [5/6] COPY service/app.py .
+#9 DONE 0.1s
+
+#10 [6/6] COPY data/schema.json /app/schema.json
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers 0.1s done
+#11 exporting manifest sha256:22a191a9ffb718370b9730486ded5ca97a1c9797c0c02458aa9c0ab34f6d22ff 0.0s done
+#11 exporting config sha256:42703e6236f1292504475bf00f90592cb3600911360a9db49c7ad581387373d8 0.0s done
+#11 exporting attestation manifest sha256:bbafe6d2de568dbbdae219ee6f4a8f066d2866781869bdc131a15822db484010 0.0s done
+#11 exporting manifest list sha256:5df3dd04ea9099ce1e3a8aa416127da9e226d9dee27a8a9eacccec6633236cae 0.0s done
+#11 naming to docker.io/library/command-parser:local done
+#11 unpacking to docker.io/library/command-parser:local 0.1s done
+#11 DONE 0.3s
+[36mINFO[0m[0000] Importing image(s) into cluster 'cs3081-cluster' 
+[36mINFO[0m[0000] Starting new tools node...                   
+[36mINFO[0m[0000] Starting node 'k3d-cs3081-cluster-tools'     
+[36mINFO[0m[0001] Saving 1 image(s) from runtime...            
+[36mINFO[0m[0012] Importing images into nodes...               
+[36mINFO[0m[0012] Importing images from tarball '/k3d/images/k3d-cs3081-cluster-images-20261109005159.tar' into node 'k3d-cs3081-cluster-server-0'... 
+[36mINFO[0m[0044] Removing the tarball(s) from image volume... 
+[36mINFO[0m[0045] Removing k3d-tools node...                   
+[36mINFO[0m[0046] Successfully imported image(s)               
+[36mINFO[0m[0046] Successfully imported 1 image(s) into 1 cluster(s) 
+namespace/app unchanged
+deployment.apps/command-parser unchanged
+service/command-parser-svc unchanged
+ingress.networking.k8s.io/command-parser-ingress unchanged
+horizontalpodautoscaler.autoscaling/command-parser-hpa unchanged
+deployment.apps/command-parser restarted
+Waiting for deployment spec update to be observed...
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser scaled
+deployment "command-parser" successfully rolled out
+Found 4 pods, using pod/command-parser-9677c4ff-xlqkn
+[00:54:45] rolling update test
+# 2026-11-09T00:54:45Z rolling update v1 -> v2 under load
+deployment.apps/command-parser scaled
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser env updated
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+# 2026-11-09T00:57:00Z rollback
+Warning: resource deployments/command-parser was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
+deployment.apps/command-parser rolled back
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser 
+REVISION  CHANGE-CAUSE
+2         <none>
+4         <none>
+5         <none>
+7         <none>
+11        <none>
+12        <none>
+14        <none>
+15        <none>
+17        <none>
+18        <none>
+
+check 1 after rollback (2026-11-09T00:58:49Z)
+HTTP/1.1 200 OK
+X-Model-Version: v1
+X-Served-By: command-parser-6c64f95568-dfpm7
+         Aggregated                                                                       471     0(0.00%) |   2026     440   15028   1900 |    1.96        0.00
+
+Response time percentiles (approximated)
+Type     Name                                                                                  50%    66%    75%    80%    90%    95%    98%    99%  99.9% 99.99%   100% # reqs
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+POST     /parse                                                                               1900   2200   2400   2500   3500   5100   6700   8600  15000  15000  15000    471
+--------|--------------------------------------------------------------------------------|--------|------|------|------|------|------|------|------|------|------|------|------
+         Aggregated                                                                           1900   2200   2400   2500   3500   5100   6700   8600  15000  15000  15000    471
+
+
+Successful requests by header:
+{
+  "per_replica": {
+    "command-parser-6c64f95568-tv57f": 107,
+    "command-parser-6c64f95568-jv57c": 71,
+    "command-parser-6d9c46dcdb-f8zrn": 96,
+    "command-parser-6d9c46dcdb-4p6xb": 89,
+    "command-parser-6c64f95568-wfpnb": 67,
+    "command-parser-6c64f95568-dfpm7": 41
+  },
+  "per_model_version": {
+    "v1": 286,
+    "v2": 185
+  }
+}
+{
+  "per_replica": {
+    "command-parser-6c64f95568-tv57f": 107,
+    "command-parser-6c64f95568-jv57c": 71,
+    "command-parser-6d9c46dcdb-f8zrn": 96,
+    "command-parser-6d9c46dcdb-4p6xb": 89,
+    "command-parser-6c64f95568-wfpnb": 67,
+    "command-parser-6c64f95568-dfpm7": 41
+  },
+  "per_model_version": {
+    "v1": 286,
+    "v2": 185
+  }
+}[00:58:50] cold start test
+# 2026-11-09T00:58:50Z cold start x3 (delete all pods; time = pod creationTimestamp -> Ready)
+pod "command-parser-6c64f95568-dfpm7" deleted from app namespace
+pod "command-parser-6c64f95568-wfpnb" deleted from app namespace
+pod/command-parser-6c64f95568-24x8v condition met
+pod/command-parser-6c64f95568-h8c4q condition met
+run 1 pod/command-parser-6c64f95568-24x8v created=2026-11-09T00:58:50Z ready=2026-11-09T00:59:58Z seconds=68
+downloaded 7 files from s3://models/v1/
+model ready
+run 1 pod/command-parser-6c64f95568-h8c4q created=2026-11-09T00:58:50Z ready=2026-11-09T00:59:58Z seconds=68
+downloaded 7 files from s3://models/v1/
+model ready
+pod "command-parser-6c64f95568-24x8v" deleted from app namespace
+pod "command-parser-6c64f95568-h8c4q" deleted from app namespace
+pod/command-parser-6c64f95568-rppzr condition met
+pod/command-parser-6c64f95568-xdfpz condition met
+run 2 pod/command-parser-6c64f95568-rppzr created=2026-11-09T01:00:00Z ready=2026-11-09T01:01:09Z seconds=69
+downloaded 7 files from s3://models/v1/
+model ready
+run 2 pod/command-parser-6c64f95568-xdfpz created=2026-11-09T01:00:00Z ready=2026-11-09T01:01:09Z seconds=69
+downloaded 7 files from s3://models/v1/
+model ready
+pod "command-parser-6c64f95568-rppzr" deleted from app namespace
+pod "command-parser-6c64f95568-xdfpz" deleted from app namespace
+pod/command-parser-6c64f95568-b8zx6 condition met
+pod/command-parser-6c64f95568-hjz4v condition met
+run 3 pod/command-parser-6c64f95568-b8zx6 created=2026-11-09T01:01:14Z ready=2026-11-09T01:02:16Z seconds=62
+downloaded 7 files from s3://models/v1/
+model ready
+run 3 pod/command-parser-6c64f95568-hjz4v created=2026-11-09T01:01:14Z ready=2026-11-09T01:02:16Z seconds=62
+downloaded 7 files from s3://models/v1/
+model ready
+Take the median of the per-pod 'seconds' values (or the slowest pod per run) and state which you used.
+{
+  "clean": {
+    "input": 3000,
+    "a": 1,
+    "b": 0,
+    "c": 10,
+    "d": 79,
+    "duplicates": 47,
+    "kept": 2863
+  },
+  "scores": {
+    "teacher": {
+      "json_validity": 99.0,
+      "intent_accuracy": 87.0,
+      "date_accuracy": 78.0,
+      "time_accuracy": 85.0,
+      "place_accuracy": 85.0,
+      "full_frame": 48.0,
+      "examples": 100,
+      "missing_predictions": 0
+    },
+    "untrained": {
+      "json_validity": 0.0,
+      "intent_accuracy": 0.0,
+      "date_accuracy": 0.0,
+      "time_accuracy": 0.0,
+      "place_accuracy": 0.0,
+      "full_frame": 0.0,
+      "examples": 100,
+      "missing_predictions": 0
+    },
+    "student_v1": {
+      "json_validity": 100.0,
+      "intent_accuracy": 88.0,
+      "date_accuracy": 87.0,
+      "time_accuracy": 90.0,
+      "place_accuracy": 80.0,
+      "full_frame": 53.0,
+      "examples": 100,
+      "missing_predictions": 0
+    },
+    "student_v2": {
+      "json_validity": 100.0,
+      "intent_accuracy": 83.0,
+      "date_accuracy": 82.0,
+      "time_accuracy": 88.0,
+      "place_accuracy": 83.0,
+      "full_frame": 48.0,
+      "examples": 100,
+      "missing_predictions": 0
+    }
+  },
+  "loadtest": {
+    "requests": 320,
+    "failures": 0,
+    "failure_percent": 0.0,
+    "p50_ms": 2000.0,
+    "p95_ms": 2400.0,
+    "rps": 2.687700887365216
+  },
+  "headers": {
+    "per_replica": {
+      "command-parser-55d4dccb84-vv2pd": 481,
+      "command-parser-55d4dccb84-kv26z": 371
+    },
+    "per_model_version": {
+      "v1": 852
+    }
+  },
+  "replica_share_percent": {
+    "command-parser-55d4dccb84-vv2pd": 56.46,
+    "command-parser-55d4dccb84-kv26z": 43.54
+  },
+  "rollout": {
+    "requests": 469,
+    "failures": 0,
+    "failure_percent": 0.0,
+    "p50_ms": 1900.0,
+    "p95_ms": 5100.0,
+    "rps": 1.965678648184169
+  },
+  "rollout_versions_seen": {
+    "v1": 286,
+    "v2": 185
+  },
+  "version_after_rollback": "v1",
+  "recovery_load": {
+    "requests": 351,
+    "failures": 0,
+    "failure_percent": 0.0,
+    "p50_ms": 2100.0,
+    "p95_ms": 4600.0,
+    "rps": 1.9637416918890038
+  },
+  "recovery_pods": {
+    "running_ready_pods_at_end": 2
+  },
+  "readiness": {
+    "samples": 40,
+    "saw_no_endpoints": true,
+    "later_had_endpoints": true
+  },
+  "hpa": {
+    "observations": 101,
+    "start_replicas": 1,
+    "max_replicas_seen": 2,
+    "final_replicas": 1,
+    "scaled_up_1_to_2": true,
+    "scaled_back_to_1": true
+  },
+  "coldstart": {
+    "per_run_seconds": {
+      "1": 68,
+      "2": 69,
+      "3": 62
+    },
+    "median_seconds": 68,
+    "definition": "per run = slowest new Pod, creationTimestamp -> Ready; median over runs"
+  },
+  "docker50": {
+    "ok": 50,
+    "oom_killed": "false",
+    "peak_mib_cgroup": 990.1,
+    "peak_mib_docker_stats": 480.4
+  },
+  "top": [
+    {
+      "pod": "command-parser-55d4dccb84-p4ngr",
+      "cpu": "1000m",
+      "memory": "521Mi"
+    },
+    {
+      "pod": "command-parser-55d4dccb84-ttgfp",
+      "cpu": "998m",
+      "memory": "469Mi"
+    }
+  ],
+  "cost": {
+    "requests": 320,
+    "failures": 0,
+    "error_rate_percent": 0.0,
+    "p50_ms": 2000.0,
+    "p95_ms": 2400.0,
+    "requests_per_second": 2.687700887365216,
+    "hourly_cost_per_replica": 3.95,
+    "hourly_cost_all_replicas": 7.9,
+    "requests_per_hour": 9675.723194514778,
+    "currency": "INR",
+    "cost_per_1000_requests": 0.8165,
+    "slo": ">= 99.0% of requests return HTTP 200 within 30 s over one 2-minute load-test run",
+    "error_budget_requests": 3.2,
+    "budget_used_requests": 0,
+    "budget_used_percent": 0.0
+  },
+  "image_size_mb": 1615.7,
+  "gitleaks_clean": true,
+  "failed_gate_run_url": "https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42536975945",
+  "passing_run_url": "https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42537234193",
+  "release_checksum_ok": true,
+  "unit_tests": "33"
+}
+rollout: {'requests': 469, 'failures': 0, 'failure_percent': 0.0, 'p50_ms': 1900.0, 'p95_ms': 5100.0, 'rps': 1.965678648184169} | versions seen: {'v1': 286, 'v2': 185} | after rollback: v1
+coldstart: {'per_run_seconds': {'1': 68, '2': 69, '3': 62}, 'median_seconds': 68, 'definition': 'per run = slowest new Pod, creationTimestamp -> Ready; median over runs'}
+[01:02:20] FIX3_DONE

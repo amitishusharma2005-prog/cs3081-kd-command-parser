@@ -175,7 +175,7 @@ def build():
     # ---- 6
     S += [P("6. Reproducibility, testing and CI/CD (Task 6)", H1),
           P("<i>make up</i> builds and deploys everything from a fresh clone (cluster, generated secrets, SeaweedFS, models fetched from the GitHub Release and checksum-verified, image, manifests); <i>make down</i> deletes the cluster; "
-            "<i>make train [SUBSET=50] [VERSION=v2]</i> trains; <i>make test</i> runs 30 unit tests plus the NACL check. The GitHub Actions workflow runs: lint (ruff) &rarr; unit tests &rarr; model evaluation "
+            "<i>make train [SUBSET=50] [VERSION=v2]</i> trains; <i>make test</i> runs the unit tests (33 at submission) plus the NACL check. The GitHub Actions workflow runs: lint (ruff) &rarr; unit tests &rarr; model evaluation "
             "(Release asset, checksum verified, score.py on validation.jsonl) &rarr; quality gate (score.py --min-validity 95) &rarr; gitleaks. A manual run with candidate=untrained shows the gate failing."),
           P("<b>Measured:</b> unit tests passed = " + sv("unit_tests") + "; release asset checksums match models/v*/model.sha256 = " + sv("release_checksum_ok")
             + "; gitleaks reported no leaks = " + sv("gitleaks_clean") + ". Failing quality-gate run (untrained Pythia-70M): " + sv("failed_gate_run_url")
@@ -207,6 +207,24 @@ def build():
                  ["Reliability and recovery", ev(os.path.exists("results/pod_recovery.log") or None, "pod_recovery.log", "see recovery log"), "Single node: no machine-level fault tolerance", "Multi-node cluster, PodDisruptionBudget"],
                  ["Security and cost", ev(cost and cost["cost_per_1000_requests"], "cost_slo.json", "{} per 1,000 requests"), "Static generated S3 keys, no TLS, replicas billed even when idle", "Short-lived credentials, TLS ingress, scale to demand"]],
                 [3 * cm, 4.2 * cm, 5.2 * cm, 4.6 * cm])]
+    S += [P("8. Deviations, failures and how they were handled", H1),
+          P("<b>Labelling.</b> All 3,000 commands were labelled by the teacher in two shards of 1,500; cleaning kept 2,863 and training used the first 1,500 cleaned records. "
+            "The teacher ran on the CPU only: the GPU path of Ollama failed on this laptop (GTX 1650, 4 GB; no usable GPU found), so Ollama was configured for CPU "
+            "(context 2048, flash attention, q8_0 KV cache). Temperature 0 and seed 42 were used throughout. Partway through, the request options were extended with "
+            "num_predict 150, a stop sequence at the next Command: line and num_gpu 0; about the first 1,700 replies were generated before that change (the exact switch time was not recorded). "
+            "The replies are short JSON objects, so the effect is expected to be small, but it was not measured."),
+          P("<b>Interruptions.</b> Labelling was interrupted by a storage restart, a silent Ollama hang of about nine hours and failed GPU model loads. The workers checkpoint every 50 commands to object storage "
+            "and resume from the checkpoint; retries and a higher job retry limit were added. Both shards finished with 1,500 lines."),
+          P(f"<b>Training.</b> v1: seed {CFG['variants']['v1']['seed']}, {CFG['variants']['v1']['epochs']} epochs; v2: seed {CFG['variants']['v2']['seed']}, {CFG['variants']['v2']['epochs']} epochs; "
+            "both on the CPU with the first 1,500 cleaned records. results/job.log also contains earlier attempts of the train stage; the submitted models come from the final run."),
+          P("<b>Deployment tests.</b> The first full deployment run did not meet the limits: the standard load test failed 99.8% (HTTP 502/503), the rolling update 14.7%, pod recovery 32.8%, "
+            "and after the rollback the service still reported v2. Cause: each Pod is limited to 1 CPU, so several simultaneous generations starved its health probes and Kubernetes marked it not ready or restarted it. "
+            "Changes made: one generation at a time per Pod, longer probe timeouts, a rollback check that waits until v1 answers, a 20 s preStop pause with a 60 s grace period, and a warm-up (two generations) before a Pod reports ready. "
+            "One CI lint job also failed once because of an over-long line, which was fixed. The raw logs of the first run were overwritten by the re-runs; later attempts are kept in results/attempts/."),
+          P("<b>Rolling update.</b> Failure rates in successive runs: 2.15%, 3.33%, 1.50% (after the longer drain) and " + sv("rollout", "failure_percent", fmt="{}%") + " over " + sv("rollout", "requests")
+            + " requests with the final image (after the warm-up). <b>HPA:</b> the first run started from 2 replicas, so no 1 to 2 step was recorded; it was re-run from 1 replica and shows 1 to 2 and back to 1. "
+            "The HPA, standard load test, load-balancing and pod-recovery measurements were taken before the warm-up change; the rolling-update and cold-start tests were re-run with the final image (cold-start median "
+            + sv("coldstart", "median_seconds", fmt="{} s") + ").")]
     S += [PageBreak(), P("References", H1),
           P("Kim &amp; Rush (2016) Sequence-Level Knowledge Distillation, EMNLP. Bastianelli et al. (2020) SLURP, EMNLP. Biderman et al. Pythia model card. k3d, SeaweedFS, Kubernetes, Locust, Gitleaks documentation; AWS VPC network ACL guide; Google SRE Book (SLOs).")]
     os.makedirs("report", exist_ok=True)

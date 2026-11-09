@@ -1,12 +1,14 @@
 {
   "per_replica": {
-    "command-parser-55d4dccb84-kfszn": 58,
-    "command-parser-55d4dccb84-6wj94": 71,
-    "command-parser-568fc864b-mkrk7": 76,
-    "command-parser-568fc864b-qvhvz": 70
+    "command-parser-6c64f95568-tv57f": 107,
+    "command-parser-6c64f95568-jv57c": 71,
+    "command-parser-6d9c46dcdb-f8zrn": 96,
+    "command-parser-6d9c46dcdb-4p6xb": 89,
+    "command-parser-6c64f95568-wfpnb": 67,
+    "command-parser-6c64f95568-dfpm7": 41
   },
   "per_model_version": {
-    "v1": 129,
-    "v2": 146
+    "v1": 286,
+    "v2": 185
   }
 }

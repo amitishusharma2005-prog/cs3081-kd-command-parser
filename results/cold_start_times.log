@@ -1,31 +1,31 @@
-# 2026-11-08T23:04:31Z cold start x3 (delete all pods; time = pod creationTimestamp -> Ready)
-pod "command-parser-55d4dccb84-89k94" deleted from app namespace
-pod "command-parser-55d4dccb84-r5gbl" deleted from app namespace
-pod/command-parser-55d4dccb84-4ww87 condition met
-pod/command-parser-55d4dccb84-fwqgf condition met
-run 1 pod/command-parser-55d4dccb84-4ww87 created=2026-11-08T23:04:31Z ready=2026-11-08T23:04:54Z seconds=23
+# 2026-11-09T00:58:50Z cold start x3 (delete all pods; time = pod creationTimestamp -> Ready)
+pod "command-parser-6c64f95568-dfpm7" deleted from app namespace
+pod "command-parser-6c64f95568-wfpnb" deleted from app namespace
+pod/command-parser-6c64f95568-24x8v condition met
+pod/command-parser-6c64f95568-h8c4q condition met
+run 1 pod/command-parser-6c64f95568-24x8v created=2026-11-09T00:58:50Z ready=2026-11-09T00:59:58Z seconds=68
 downloaded 7 files from s3://models/v1/
 model ready
-run 1 pod/command-parser-55d4dccb84-fwqgf created=2026-11-08T23:04:31Z ready=2026-11-08T23:04:54Z seconds=23
+run 1 pod/command-parser-6c64f95568-h8c4q created=2026-11-09T00:58:50Z ready=2026-11-09T00:59:58Z seconds=68
 downloaded 7 files from s3://models/v1/
 model ready
-pod "command-parser-55d4dccb84-4ww87" deleted from app namespace
-pod "command-parser-55d4dccb84-fwqgf" deleted from app namespace
-pod/command-parser-55d4dccb84-cm4rr condition met
-pod/command-parser-55d4dccb84-f4zzx condition met
-run 2 pod/command-parser-55d4dccb84-cm4rr created=2026-11-08T23:04:57Z ready=2026-11-08T23:05:56Z seconds=59
+pod "command-parser-6c64f95568-24x8v" deleted from app namespace
+pod "command-parser-6c64f95568-h8c4q" deleted from app namespace
+pod/command-parser-6c64f95568-rppzr condition met
+pod/command-parser-6c64f95568-xdfpz condition met
+run 2 pod/command-parser-6c64f95568-rppzr created=2026-11-09T01:00:00Z ready=2026-11-09T01:01:09Z seconds=69
 downloaded 7 files from s3://models/v1/
 model ready
-run 2 pod/command-parser-55d4dccb84-f4zzx created=2026-11-08T23:04:57Z ready=2026-11-08T23:05:56Z seconds=59
+run 2 pod/command-parser-6c64f95568-xdfpz created=2026-11-09T01:00:00Z ready=2026-11-09T01:01:09Z seconds=69
 downloaded 7 files from s3://models/v1/
 model ready
-pod "command-parser-55d4dccb84-cm4rr" deleted from app namespace
-pod "command-parser-55d4dccb84-f4zzx" deleted from app namespace
-pod/command-parser-55d4dccb84-p4ngr condition met
-pod/command-parser-55d4dccb84-ttgfp condition met
-run 3 pod/command-parser-55d4dccb84-p4ngr created=2026-11-08T23:05:57Z ready=2026-11-08T23:06:55Z seconds=58
+pod "command-parser-6c64f95568-rppzr" deleted from app namespace
+pod "command-parser-6c64f95568-xdfpz" deleted from app namespace
+pod/command-parser-6c64f95568-b8zx6 condition met
+pod/command-parser-6c64f95568-hjz4v condition met
+run 3 pod/command-parser-6c64f95568-b8zx6 created=2026-11-09T01:01:14Z ready=2026-11-09T01:02:16Z seconds=62
 downloaded 7 files from s3://models/v1/
 model ready
-run 3 pod/command-parser-55d4dccb84-ttgfp created=2026-11-08T23:05:57Z ready=2026-11-08T23:06:55Z seconds=58
+run 3 pod/command-parser-6c64f95568-hjz4v created=2026-11-09T01:01:14Z ready=2026-11-09T01:02:16Z seconds=62
 downloaded 7 files from s3://models/v1/
 model ready

@@ -1,0 +1,259 @@
+manifest patched
+18:      terminationGracePeriodSeconds: 60
+41:              exec: {command: ["sleep", "20"]}
+[00:41:54] apply the manifest and wait until both pods are ready
+namespace/app unchanged
+deployment.apps/command-parser configured
+service/command-parser-svc unchanged
+ingress.networking.k8s.io/command-parser-ingress unchanged
+horizontalpodautoscaler.autoscaling/command-parser-hpa unchanged
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser scaled
+deployment "command-parser" successfully rolled out
+[00:44:02] rolling update test (about 8 min)
+# 2026-11-09T00:44:02Z rolling update v1 -> v2 under load
+deployment.apps/command-parser scaled
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser env updated
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+# 2026-11-09T00:46:28Z rollback
+Warning: resource deployments/command-parser was previously managed with 'kubectl apply'. Rolling back will not update the kubectl.kubernetes.io/last-applied-configuration annotation, which may cause unexpected behavior on future 'kubectl apply' operations. Consider using 'kubectl apply' with your previous configuration file instead.
+deployment.apps/command-parser rolled back
+Waiting for deployment spec update to be observed...
+Waiting for deployment "command-parser" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "command-parser" rollout to finish: 1 old replicas are pending termination...
+deployment "command-parser" successfully rolled out
+deployment.apps/command-parser 
+REVISION  CHANGE-CAUSE
+2         <none>
+4         <none>
+5         <none>
+7         <none>
+11        <none>
+12        <none>
+14        <none>
+15        <none>
+
+check 1 after rollback (2026-11-09T00:48:04Z)
+HTTP/1.1 200 OK
+X-Model-Version: v1
+X-Served-By: command-parser-9677c4ff-xlqkn
+         Aggregated                                                                           1900   2400   2800   3300   4800   6800  19000  30000  30000  30000  30000    333
+
+Error report
+# occurrences      Error                                                                                               
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+4                  POST /parse: HTTP 0                                                                                 
+1                  POST /parse: HTTP 502                                                                               
+------------------|---------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Successful requests by header:
+{
+  "per_replica": {
+    "command-parser-9677c4ff-2zmqq": 79,
+    "command-parser-9677c4ff-nfkqk": 57,
+    "command-parser-c6dc678c7-5s482": 86,
+    "command-parser-c6dc678c7-pdl5n": 43,
+    "command-parser-9677c4ff-xlqkn": 44,
+    "command-parser-9677c4ff-f42vx": 19
+  },
+  "per_model_version": {
+    "v1": 199,
+    "v2": 129
+  }
+}
+{
+  "per_replica": {
+    "command-parser-9677c4ff-2zmqq": 79,
+    "command-parser-9677c4ff-nfkqk": 57,
+    "command-parser-c6dc678c7-5s482": 86,
+    "command-parser-c6dc678c7-pdl5n": 43,
+    "command-parser-9677c4ff-xlqkn": 44,
+    "command-parser-9677c4ff-f42vx": 19
+  },
+  "per_model_version": {
+    "v1": 199,
+    "v2": 129
+  }
+}{
+  "clean": {
+    "input": 3000,
+    "a": 1,
+    "b": 0,
+    "c": 10,
+    "d": 79,
+    "duplicates": 47,
+    "kept": 2863
+  },
+  "scores": {
+    "teacher": {
+      "json_validity": 99.0,
+      "intent_accuracy": 87.0,
+      "date_accuracy": 78.0,
+      "time_accuracy": 85.0,
+      "place_accuracy": 85.0,
+      "full_frame": 48.0,
+      "examples": 100,
+      "missing_predictions": 0
+    },
+    "untrained": {
+      "json_validity": 0.0,
+      "intent_accuracy": 0.0,
+      "date_accuracy": 0.0,
+      "time_accuracy": 0.0,
+      "place_accuracy": 0.0,
+      "full_frame": 0.0,
+      "examples": 100,
+      "missing_predictions": 0
+    },
+    "student_v1": {
+      "json_validity": 100.0,
+      "intent_accuracy": 88.0,
+      "date_accuracy": 87.0,
+      "time_accuracy": 90.0,
+      "place_accuracy": 80.0,
+      "full_frame": 53.0,
+      "examples": 100,
+      "missing_predictions": 0
+    },
+    "student_v2": {
+      "json_validity": 100.0,
+      "intent_accuracy": 83.0,
+      "date_accuracy": 82.0,
+      "time_accuracy": 88.0,
+      "place_accuracy": 83.0,
+      "full_frame": 48.0,
+      "examples": 100,
+      "missing_predictions": 0
+    }
+  },
+  "loadtest": {
+    "requests": 320,
+    "failures": 0,
+    "failure_percent": 0.0,
+    "p50_ms": 2000.0,
+    "p95_ms": 2400.0,
+    "rps": 2.687700887365216
+  },
+  "headers": {
+    "per_replica": {
+      "command-parser-55d4dccb84-vv2pd": 481,
+      "command-parser-55d4dccb84-kv26z": 371
+    },
+    "per_model_version": {
+      "v1": 852
+    }
+  },
+  "replica_share_percent": {
+    "command-parser-55d4dccb84-vv2pd": 56.46,
+    "command-parser-55d4dccb84-kv26z": 43.54
+  },
+  "rollout": {
+    "requests": 333,
+    "failures": 5,
+    "failure_percent": 1.502,
+    "p50_ms": 1900.0,
+    "p95_ms": 6800.0,
+    "rps": 1.393283003669159
+  },
+  "rollout_versions_seen": {
+    "v1": 199,
+    "v2": 129
+  },
+  "version_after_rollback": "v1",
+  "recovery_load": {
+    "requests": 351,
+    "failures": 0,
+    "failure_percent": 0.0,
+    "p50_ms": 2100.0,
+    "p95_ms": 4600.0,
+    "rps": 1.9637416918890038
+  },
+  "recovery_pods": {
+    "running_ready_pods_at_end": 2
+  },
+  "readiness": {
+    "samples": 40,
+    "saw_no_endpoints": true,
+    "later_had_endpoints": true
+  },
+  "hpa": {
+    "observations": 101,
+    "start_replicas": 1,
+    "max_replicas_seen": 2,
+    "final_replicas": 1,
+    "scaled_up_1_to_2": true,
+    "scaled_back_to_1": true
+  },
+  "coldstart": {
+    "per_run_seconds": {
+      "1": 23,
+      "2": 59,
+      "3": 58
+    },
+    "median_seconds": 58,
+    "definition": "per run = slowest new Pod, creationTimestamp -> Ready; median over runs"
+  },
+  "docker50": {
+    "ok": 50,
+    "oom_killed": "false",
+    "peak_mib_cgroup": 990.1,
+    "peak_mib_docker_stats": 480.4
+  },
+  "top": [
+    {
+      "pod": "command-parser-55d4dccb84-p4ngr",
+      "cpu": "1000m",
+      "memory": "521Mi"
+    },
+    {
+      "pod": "command-parser-55d4dccb84-ttgfp",
+      "cpu": "998m",
+      "memory": "469Mi"
+    }
+  ],
+  "cost": {
+    "requests": 320,
+    "failures": 0,
+    "error_rate_percent": 0.0,
+    "p50_ms": 2000.0,
+    "p95_ms": 2400.0,
+    "requests_per_second": 2.687700887365216,
+    "hourly_cost_per_replica": 3.95,
+    "hourly_cost_all_replicas": 7.9,
+    "requests_per_hour": 9675.723194514778,
+    "currency": "INR",
+    "cost_per_1000_requests": 0.8165,
+    "slo": ">= 99.0% of requests return HTTP 200 within 30 s over one 2-minute load-test run",
+    "error_budget_requests": 3.2,
+    "budget_used_requests": 0,
+    "budget_used_percent": 0.0
+  },
+  "image_size_mb": 1615.7,
+  "gitleaks_clean": true,
+  "failed_gate_run_url": "https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42536975945",
+  "passing_run_url": "https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser/actions/runs/42537234193",
+  "release_checksum_ok": true,
+  "unit_tests": "33"
+}
+rollout: {'requests': 333, 'failures': 5, 'failure_percent': 1.502, 'p50_ms': 1900.0, 'p95_ms': 6800.0, 'rps': 1.393283003669159} | versions seen: {'v1': 199, 'v2': 129} | after rollback: v1
+[00:48:05] FIX2_DONE

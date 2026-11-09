@@ -1,0 +1,7 @@
+[01:05:29] === STAGE finalize ===
+[01:05:29] $ /home/student/cs3081-kd-command-parser/.venv/bin/python3 scripts/build_report.py
+report/report.pdf: 4 pages total (last page is References)
+[01:05:31] $ /home/student/cs3081-kd-command-parser/.venv/bin/python3 scripts/build_reflection.py
+reflection_draft_typed.pdf written (font 12.5 pt): print it, copy it BY HAND, scan the 3 pages to 230103033.pdf
+230103033.pdf already exists and was left untouched (your scan).
+[01:05:31] $ git add -A
