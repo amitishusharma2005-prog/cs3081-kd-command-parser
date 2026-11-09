@@ -41,3 +41,61 @@ report/report.pdf: 4 pages total (last page is References)
 reflection_draft_typed.pdf written (font 12.5 pt): print it, copy it BY HAND, scan the 3 pages to 230103033.pdf
 230103033.pdf already exists and was left untouched (your scan).
 [01:05:36] $ git add -A
+[01:05:36] $ git commit -m Final submission
+[main 7881892] Final submission
+ 5 files changed, 44 insertions(+), 8 deletions(-)
+[01:05:36] $ git tag -f final
+Updated tag 'final' (was 39afd8e)
+[01:05:36] $ git push -u origin main
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+   39afd8e..7881892  main -> main
+branch 'main' set up to track 'origin/main'.
+[01:05:39] $ git tag -f final && git push -f origin final
+To https://github.com/amitishusharma2005-prog/cs3081-kd-command-parser.git
+ + 39afd8e...7881892 final -> final (forced update)
+[01:05:42] $ /home/student/cs3081-kd-command-parser/.venv/bin/python3 scripts/check_submission.py
+PASS  k3d.yaml, teacher prompt
+PASS  every id in exactly one shard  [3000 lines, 3000 unique, pool 3000]
+PASS  train.sha256 matches train.jsonl
+PASS  counts add up  [{'input': 3000, 'a': 1, 'b': 0, 'c': 10, 'd': 79, 'duplicates': 47, 'kept': 2863}]
+PASS  config.yaml has the six items
+PASS  loss.csv one row per epoch  [8 rows]
+PASS  model.sha256 for v1 and v2
+PASS  results/teacher predictions + report
+PASS  results/untrained predictions + report
+PASS  results/student_v1 predictions + report
+PASS  results/student_v2 predictions + report
+PASS  student json_validity >= 95  [100.0]
+PASS  student full_frame >= half of teacher  [53.0 vs 48.0]
+PASS  service files
+PASS  pinned requirements
+PASS  manifests
+PASS  network files
+PASS  nacl_sim --check
+PASS  CI workflow, Makefile, AI_USE.md, README.md
+PASS  results/loadtest_stats.csv
+PASS  results/loadtest_headers.json
+PASS  results/docker_50req_limit_test.log
+PASS  results/readiness_gate.log
+PASS  results/hpa_scaling.log
+PASS  results/rolling_update_rollback.log
+PASS  results/pod_recovery.log
+PASS  results/cold_start_times.log
+PASS  results/kubectl_top_pods.log
+PASS  results/cost_slo.json
+PASS  report/report.pdf
+PASS  230103033.pdf (reflection)
+PASS  reflection is at most 3 pages
+PASS  report has no NOT MEASURED / NOT AVAILABLE placeholders
+PASS  report is at most 8 pages (references/appendices excluded: check by eye if it is longer)  [4]
+PASS  failed quality-gate CI run URL recorded
+PASS  230103033.pdf is your handwritten scan, not the typed placeholder  [replace it, then run scripts/seal_submission.py]
+PASS  git tag final
+PASS  no model weights tracked
+
+38/38 checks passed
+[01:05:42] $ /home/student/cs3081-kd-command-parser/.venv/bin/python3 scripts/package_submission.py
+wrote 230103033.zip 4437823 bytes
+
+DONE. Submit ONLY ./230103033.zip
+[01:05:42] stage finalize done in 13s

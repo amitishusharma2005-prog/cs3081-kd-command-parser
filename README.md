@@ -25,8 +25,6 @@ report/     report.pdf
 ```
 Prerequisites: Docker, k3d, kubectl, Python 3.11, Ollama (for labelling only), `pip install locust`.
 
-## Fully automatic
-Windows 11: double-click `RUN_EVERYTHING.bat` (installs WSL2 + Ubuntu + Docker Engine on the drive with most free space, not Docker Desktop; may restart Windows once and continues by itself). Linux/WSL2: `bash setup_and_run.sh`. Both install what is missing and run `scripts/run_all.py`.
 
 ## One command (if the tools are already installed)
 Linux or WSL2 with Docker, k3d, kubectl, git and Ollama (`OLLAMA_HOST=0.0.0.0 ollama serve`, phi3.5 pulled). The GitHub CLI (`gh auth login`) lets it create the Release and trigger the CI runs itself.
@@ -36,8 +34,6 @@ python3 scripts/run_all.py            # or: make all
 It runs preflight (lint, tests, NACL check), cluster, teacher labelling, cleaning, training v1/v2, GitHub Release, evaluation of all three models,
 deployment, every Task 4/7 measurement, the two CI runs (untrained = failing gate, student = passing), then builds `report/report.pdf`, `230103033.pdf`, runs gitleaks and the submission check, tags `final` and writes `230103033.zip`.
 It is resumable (`--status`, `--from STAGE`, `--only STAGE`); a failing stage stops with the reason. Every number in the report comes from the real outputs in `results/`.
-After it finishes: print `reflection_draft_typed.pdf`, copy it by hand onto paper, scan 3 pages to `230103033.pdf` (replace the placeholder), then run `python3 scripts/seal_submission.py`.
-Optional: write your own challenges/observations in `my_notes.md` before the last stage; they are added to the reflection.
 
 ## Step by step (what the runner does)
 ```bash
