@@ -1,5 +1,5 @@
-# 2026-11-08T23:54:49.178187Z  $ docker run --rm -v "$PWD":/repo zricethezav/gitleaks:v8.21.2 detect --source /repo --no-banner --redact  (exit 0)
-[90m11:54PM[0m [32mINF[0m 9 commits scanned.
-[90m11:54PM[0m [32mINF[0m scan completed in 748ms
-[90m11:54PM[0m [32mINF[0m no leaks found
+# 2026-11-09T01:05:35.322000Z  $ docker run --rm -v "$PWD":/repo zricethezav/gitleaks:v8.21.2 detect --source /repo --no-banner --redact  (exit 0)
+[90m1:05AM[0m [32mINF[0m 11 commits scanned.
+[90m1:05AM[0m [32mINF[0m scan completed in 1.14s
+[90m1:05AM[0m [32mINF[0m no leaks found
 exit=0

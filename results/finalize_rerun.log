@@ -5,3 +5,39 @@ report/report.pdf: 4 pages total (last page is References)
 reflection_draft_typed.pdf written (font 12.5 pt): print it, copy it BY HAND, scan the 3 pages to 230103033.pdf
 230103033.pdf already exists and was left untouched (your scan).
 [01:05:31] $ git add -A
+[01:05:31] $ git commit -m Report, reflection and results
+[main 2deb6c8] Report, reflection and results
+ 41 files changed, 7805 insertions(+), 1642 deletions(-)
+ create mode 100644 results/attempts/attempt1_hpa_load_console.log
+ create mode 100644 results/attempts/attempt1_hpa_scaling.log
+ create mode 100644 results/attempts/attempt1_rolling_update_rollback.log
+ create mode 100644 results/attempts/attempt1_rollout_console.log
+ create mode 100644 results/attempts/attempt1_rollout_failures.csv
+ create mode 100644 results/attempts/attempt1_rollout_headers.json
+ create mode 100644 results/attempts/attempt2_rolling_update_rollback.log
+ create mode 100644 results/attempts/attempt2_rollout_console.log
+ create mode 100644 results/attempts/attempt2_rollout_failures.csv
+ create mode 100644 results/attempts/attempt2_rollout_headers.json
+ create mode 100644 results/attempts/attempt2_rollout_stats_history.csv
+ create mode 100644 results/attempts/attempt3_rolling_update_rollback.log
+ create mode 100644 results/attempts/attempt3_rollout_console.log
+ create mode 100644 results/attempts/attempt3_rollout_failures.csv
+ create mode 100644 results/attempts/attempt3_rollout_headers.json
+ create mode 100644 results/attempts/attempt3_rollout_stats_history.csv
+ create mode 100644 results/finalize_rerun.log
+ create mode 100644 results/fix_evidence.log
+ create mode 100644 results/fix_rollout.log
+ create mode 100644 results/fix_warmup.log
+ create mode 100644 results/job_exit.txt
+[01:05:31] $ docker run --rm -v "$PWD":/repo zricethezav/gitleaks:v8.21.2 detect --source /repo --no-banner --redact
+/home/student/cs3081-kd-command-parser/scripts/run_all.py:66: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  f.write(f"# {datetime.utcnow().isoformat()}Z  $ {cmd if shell else ' '.join(cmd)}  (exit {rc})\n{text}")
+[90m1:05AM[0m [32mINF[0m 11 commits scanned.
+[90m1:05AM[0m [32mINF[0m scan completed in 1.14s
+[90m1:05AM[0m [32mINF[0m no leaks found
+[01:05:35] $ /home/student/cs3081-kd-command-parser/.venv/bin/python3 scripts/build_report.py
+report/report.pdf: 4 pages total (last page is References)
+[01:05:35] $ /home/student/cs3081-kd-command-parser/.venv/bin/python3 scripts/build_reflection.py
+reflection_draft_typed.pdf written (font 12.5 pt): print it, copy it BY HAND, scan the 3 pages to 230103033.pdf
+230103033.pdf already exists and was left untouched (your scan).
+[01:05:36] $ git add -A
